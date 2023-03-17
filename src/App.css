@@ -1,0 +1,19 @@
+body{
+  background-color: #121212;
+  color:rgb(222, 222, 222);
+  margin: 0;
+  font-family: 'Lucida Sans';
+}
+/* Navbar */
+.navbar{
+  background-color: #1c1c1c;
+  color:rgb(193, 193, 193);
+  margin: 0;
+  padding: 20px 10px;
+  box-shadow: 2px 4px 30px #111111;;
+}
+.navbar h1{
+  color:rgb(192, 209, 255);
+  font-size: 3rem;
+  margin: 0;
+}
