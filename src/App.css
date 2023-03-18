@@ -2,18 +2,61 @@ body{
   background-color: #121212;
   color:rgb(222, 222, 222);
   margin: 0;
-  font-family: 'Lucida Sans';
+  font-family: 'Montserrat', sans-serif;
 }
+.ml-5{
+  margin-left: 15px;
+}
+
+/* dasboard */
+.dasboard{
+  display: grid;
+  justify-content: center;
+  margin: 30px auto
+}
+
+/* Rooms */
+.room-container{
+  background-color: #1c1c1c;
+  display: grid;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  width: 800px;
+  box-shadow: 2px 4px 15px #0c0c0c;
+}
+.user-list{
+  display: flex;
+  flex-direction: row;
+}
+
 /* Navbar */
 .navbar{
   background-color: #1c1c1c;
-  color:rgb(193, 193, 193);
+  color:#e7e8ff;
   margin: 0;
   padding: 20px 10px;
-  box-shadow: 2px 4px 30px #111111;;
+  box-shadow: 2px 4px 15px #0e0e0e;
+}
+.navbar-grid{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 30px;
+}
+.navbar button{
+  width: 100px;
+  font-size: 1.2rem;
+  padding: 9px 6px;
+  margin-right: 10px;
+  background-color: #1c1c1c;
+  color:#dbdbdb;
+  border: solid #606060 1px;
+  border-radius: 5px;
 }
 .navbar h1{
-  color:rgb(192, 209, 255);
+  color:#e7e8ff;
   font-size: 3rem;
+  font-weight: 200;
   margin: 0;
 }
