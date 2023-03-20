@@ -8,6 +8,7 @@ body{
   margin-left: 15px;
 }
 
+
 /* dasboard */
 .dasboard{
   display: grid;
@@ -28,6 +29,11 @@ body{
   display: flex;
   flex-direction: row;
 }
+
+/* login */
+
+
+/* register */
 
 /* Navbar */
 .navbar{
@@ -59,4 +65,44 @@ body{
   font-size: 3rem;
   font-weight: 200;
   margin: 0;
+}
+
+/* boostrap */
+.btn {
+  font-size: 14px;
+  padding: 6px 12px;
+  margin-bottom: 0;
+
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+}
+.btn:focus,
+.btn:active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus {
+  color: #333;
+  background-color: #cacaca;
+  text-decoration: none;
+}
+.btn:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
