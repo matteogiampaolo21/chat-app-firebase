@@ -4,6 +4,7 @@ import { DocumentData, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams} from "react-router-dom"
 import { Message } from "../assets/types";
+import "../styles/rooms.css"
 
 export const Rooms = () => {
 
@@ -57,7 +58,7 @@ export const Rooms = () => {
             })}
             <form className="message-form">
             <input className="dark-input" type="text" />
-            <button className="success-btn" type="submit">Send</button>
+            <button className="blue-btn" type="submit">Send</button>
             </form>
           </div>
         </div>

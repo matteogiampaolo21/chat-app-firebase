@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 import { Room } from "../assets/types";
 
+import "../styles/dashboard.css"
 export const Dashboard = () => {
 
     const [user] = useAuthState(auth);
@@ -48,20 +49,18 @@ export const Dashboard = () => {
             { user ?
                 <div className="dasboard-grid">
 
-                    <div className="sidebar">
-                        <h2>Create</h2>
+                    <div className="dashboard-sidebar">
+                        <h2>Create room:</h2>
                         
-                            Name : 
-                            <input className="dark-input ml-5" type="text" />
-                            <button className="success-btn">+</button>
-                       
+                        <input className="dark-input mr-5" type="text" placeholder="Enter name" />
+                        <button type="submit" className="blue-btn">+</button>
                     </div>
 
                     <div className="dasboard">
                         {userRooms.map( (doc:Room,index:number) => {
                             return(
                                 <div onClick={() => {navigate(`/dashboard/${doc.id}`)}} key={index} className="room-container">
-                                    <h2 className="ml-5">{doc.name}</h2>
+                                    <h2 className="room-title ml-5">{doc.name}</h2>
                                     <div className="user-list">
                                         <p className="ml-5"><b>Users:</b> </p>
                                         {doc.users.slice(0,4).map( (user:string, index:number) => {

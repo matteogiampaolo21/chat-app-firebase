@@ -1,0 +1,72 @@
+:root{
+    --dark-bg-color: #121212;
+    --dark-font-color: #dbdbdb;
+    --light-bg-blue:#559cff;
+    --light-bg-blue-2: #3589ff;
+    --hover-color: #ffffff;
+    --dark-component-bg: #1c1c1c;
+    --component-shadow: #0c0c0c;
+}
+body{
+    background-color: var(--dark-bg-color);
+    color:var(--dark-font-color);
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* quick css */
+.ml-5{
+    margin-left: 15px; 
+}
+.mr-5{
+    margin-right: 15px;
+}
+
+
+/* assets */
+.dark-btn{
+    width: 100px;
+    font-size: 1.2rem;
+    padding: 9px 6px;
+    background-color: var(--dark-bg-color);
+    color: var(--dark-font-color);
+    border: solid #393939 1px;
+    border-radius: 5px;
+    transition: 0.4s;
+}
+.dark-btn:hover{
+    background-color: var(--light-bg-blue-2);
+    color: #ffffff ;
+    border: solid #ffffff 1px;
+    cursor: pointer; 
+}
+  
+.dark-input{
+    font-size: 1.4rem;
+    background-color: var(--dark-bg-color);
+    color: var(--dark-font-color);
+    border: none;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+.dark-input:hover{
+    outline: none;
+}
+.dark-input:not(:hover){
+    outline: none;
+}
+
+.blue-btn{
+    font-size: 1.2rem;
+    background-color: var(--light-bg-blue);
+    color: #e6e6e6;
+    border: solid 0px;
+    border: solid 1px var(--light-bg-blue);  
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.blue-btn:hover{
+    background-color: #3589ff;
+    color: #ffffff;
+    border: solid 1px #ffffff;
+}

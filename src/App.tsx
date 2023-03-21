@@ -1,5 +1,5 @@
 
-import './App.css'
+import './styles/app.css'
 import { useAuthState} from "react-firebase-hooks/auth"
 import { Navbar } from "./components/navbar"
 import { AuthLogin } from './components/authLogin'

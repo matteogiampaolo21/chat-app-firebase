@@ -1,6 +1,8 @@
 import { signOut} from "firebase/auth";
 import { auth } from "../config/firebase";
 
+import "../styles/navbar.css"
+
 
 export const Navbar = () => {
 
