@@ -15,8 +15,14 @@ export const Navbar = () => {
   return (
     <div className="navbar">
         <div className="navbar-grid">
+          <div className="navbar-grid">
           <h1>Mercury</h1>
-          <button onClick={logOut}>Log Out</button>
+          <a className="nav-link" href="/dashboard">Dashboard</a>
+          <a className="nav-link" href="/register">Register</a>
+          <a className="nav-link" href="/login">Login</a>
+          </div>
+          <button className="dark-btn ml-5 mr-5" onClick={logOut}>Sign Out</button>
+          
         </div>
     </div>
   )

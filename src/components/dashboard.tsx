@@ -10,17 +10,20 @@ export const Dashboard = () => {
 
     const [user] = useAuthState(auth);
     const [userRooms,setRooms] = useState<DocumentData>([]);
+    const [isLoading, setLoading] = useState<boolean>(true)
     
     const navigate = useNavigate();
-
     useEffect(() => {
         const readDocuments = async () => {
             const querySnapshot = await getDocs(collection(db, "rooms"));
             let tempArray:DocumentData = []
             querySnapshot.forEach((doc) => {
-                tempArray.push(doc.data());
+                const obj = doc.data();
+                obj.id = doc.id;
+                tempArray.push(obj);
             });
             setRooms(tempArray)
+            setLoading(false)
             
         }
         readDocuments()
@@ -29,11 +32,15 @@ export const Dashboard = () => {
 
     return (
         <div>
+        {isLoading ?
+        <div></div>
+        :
+        <div>
             { user ?
                 <div className="dasboard">
                     {userRooms.map( (doc:Room,index:number) => {
                         return(
-                            <div key={index} className="room-container">
+                            <div onClick={() => {navigate(`/dashboard/${doc.id}`)}} key={index} className="room-container">
                                 <h2 className="ml-5">{doc.name}</h2>
                                 <div className="user-list">
                                     <p className="ml-5"><b>Users:</b> </p>
@@ -55,6 +62,8 @@ export const Dashboard = () => {
                     <button onClick={()=>{navigate("/login")}} className="btn">Login here!</button>
                 </div>
             }
+        </div>
+        }
         </div>
     )
 
