@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path='/register' element={<AuthRegister/>}/>
         <Route path='/login' element={<AuthLogin/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/:roomId' element={<Rooms/>} />
       </Routes>
     </Router>

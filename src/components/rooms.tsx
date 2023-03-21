@@ -2,7 +2,7 @@ import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import { DocumentData, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import {useNavigate, useParams} from "react-router-dom"
+import { useParams} from "react-router-dom"
 import { Message } from "../assets/types";
 
 export const Rooms = () => {
@@ -56,7 +56,7 @@ export const Rooms = () => {
               )
             })}
             <form className="message-form">
-            <input type="text" />
+            <input className="dark-input" type="text" />
             <button className="success-btn" type="submit">Send</button>
             </form>
           </div>
