@@ -1,6 +1,6 @@
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
-import { DocumentData, doc, getDoc, addDoc, query, where, onSnapshot , collection } from "firebase/firestore";
+import { DocumentData, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams} from "react-router-dom"
 import { Message } from "../assets/types";
@@ -40,6 +40,11 @@ export const Rooms = () => {
       const currentMessageArray:Message[] = (userRoom.messages)
       currentMessageArray.push({timeDelivered:timeSent,text:inputText});
       console.log(currentMessageArray)
+      const roomRef = doc(db, "rooms", `${roomId}`);
+
+      await updateDoc(roomRef, {
+        messages: currentMessageArray
+      });
       setText("")
     }
 
@@ -66,8 +71,8 @@ export const Rooms = () => {
               )
             })}
             <form className="message-form">
-            <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
-            <button onClick={handleClick} className="blue-btn" type="button">Send</button>
+              <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
+              <button onClick={handleClick} className="blue-btn" type="button">Send</button>
             </form>
           </div>
         </div>

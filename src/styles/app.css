@@ -1,17 +1,25 @@
 :root{
-    --dark-bg-color: #121212;
+    --dark-bg-color: #282828;
     --dark-font-color: #dbdbdb;
-    --light-bg-blue:#559cff;
-    --light-bg-blue-2: #3589ff;
+    --light-bg-blue:#2b81f9;
+    --light-bg-blue-2: #0056ce;
     --hover-color: #ffffff;
-    --dark-component-bg: #1c1c1c;
-    --component-shadow: #0c0c0c;
+    --dark-component-bg: #363636;
+    --component-shadow: #202020;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #a0a0a0;
+    opacity: 1; /* Firefox */
 }
 body{
     background-color: var(--dark-bg-color);
     color:var(--dark-font-color);
     margin: 0;
     font-family: 'Montserrat', sans-serif;
+    background-image:  radial-gradient(var(--dark-component-bg) 2px, transparent 2px), radial-gradient( var(--dark-component-bg) 2px, var(--dark-bg-color) 2px);
+    background-size: 80px 80px;
+    background-position: 0 0,40px 40px;
 }
 
 /* quick css */
@@ -66,7 +74,7 @@ body{
     transition: 0.3s;
 }
 .blue-btn:hover{
-    background-color: #3589ff;
+    background-color: var(--light-bg-blue-2);
     color: #ffffff;
     border: solid 1px #ffffff;
 }

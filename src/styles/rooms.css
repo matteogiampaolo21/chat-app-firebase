@@ -7,15 +7,15 @@
   
   }
   .sidebar{
-    background-color: #1c1c1c;
+    background-color: var(--dark-component-bg);
     border-radius: 5px;
-    box-shadow: 2px 4px 15px #0c0c0c;
+    box-shadow: 2px 4px 15px var(--component-shadow);
     padding-left: 20px;
   }
   .message-box{
-    background-color: #1c1c1c;
+    background-color: var(--dark-component-bg);
     border-radius: 5px;
-    box-shadow: 2px 4px 15px #0c0c0c;
+    box-shadow: 2px 4px 15px var(--component-shadow);
     padding-left: 20px;
     padding-right: 20px;
   }
