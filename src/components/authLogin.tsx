@@ -21,10 +21,14 @@ export const AuthLogin = () => {
 
     return (
         <div className="log-in">
-            <input onChange={(event) => {setEmail(event.target.value)}} placeholder="Email"></input><br /><br />
-            <input onChange={(event) => {setPassword(event.target.value)}} type="password" placeholder="Password"></input><br /><br />  
-            <button className="btn" onClick={logIn}>Log In</button> <br /><br />
-            <button className="btn" onClick={() => {navigate("/register")}}>Don't have an account?</button>
+            <h1 style={{textAlign:"center"}}>Login</h1>
+            <h3 className="m0">Email:</h3>
+            <input className="dark-input" onChange={(event) => {setEmail(event.target.value)}} placeholder="Email"></input>
+            <h3 className="m0">Password:</h3>
+            <input className="dark-input" onChange={(event) => {setPassword(event.target.value)}} type="password" placeholder="Password"></input> 
+            <button className="dark-btn max-width green-hover" onClick={logIn}>Log In</button>
+            <h4 className="mt-5 mb-5" style={{textAlign:"center"}}>Or</h4>
+            <button className="dark-btn max-width purple-hover"  onClick={() => {navigate("/register")}}>Don't have an account?</button>
         </div>
     )
 }

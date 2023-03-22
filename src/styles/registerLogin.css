@@ -1,0 +1,55 @@
+.sign-in,.log-in{
+    background: transparent;
+    backdrop-filter: blur(2px);
+    border-radius: 10px;
+    width: 370px;
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto; 
+    background: radial-gradient(circle at 60% 40%, #2e2e2e 25%, transparent 26%),radial-gradient(circle at 40% 60%, #303030 25%, transparent 26%) ;
+    background-size: 7em 12em;
+    background-color: var(--dark-component-bg);
+    opacity: 1
+}
+.sign-in .dark-input{
+    height:2.2rem;
+    margin-top:10px;
+    margin-bottom: 25px;
+}
+.sign-in .dark-btn{
+    height:3.2rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.sign-in .green-hover:hover{
+    background-color: #00c254;
+    color: #ffffff;
+}
+.sign-in .purple-hover:hover{
+    background-color: #8e00c1;
+    color: #ffffff;
+    
+}
+
+
+.log-in .dark-input{
+    height:2.2rem;
+    margin-top:10px;
+    margin-bottom: 25px;
+}
+.log-in .dark-btn{
+    height:3.2rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.log-in .green-hover:hover{
+    background-color: #00c254;
+    color: #ffffff;
+}
+.log-in .purple-hover:hover{
+    background-color: #8e00c1;
+    color: #ffffff;
+    
+}
