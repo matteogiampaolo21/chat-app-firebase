@@ -42,7 +42,7 @@ body{
 }
   
 .dark-input{
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     background-color: var(--dark-bg-color);
     color: var(--dark-font-color);
     border: none;

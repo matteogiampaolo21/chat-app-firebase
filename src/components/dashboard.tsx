@@ -1,7 +1,7 @@
 
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
-import { query, where, doc, onSnapshot ,collection , DocumentData, getDocs, QuerySnapshot } from "firebase/firestore";
+import {addDoc, query, where, onSnapshot ,collection , DocumentData, } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 import { Room } from "../assets/types";
@@ -12,6 +12,7 @@ export const Dashboard = () => {
     const [user] = useAuthState(auth);
     const [userRooms,setRooms] = useState<DocumentData>([]);
     const [isLoading, setLoading] = useState<boolean>(true);
+    const [roomName, setName] = useState<string>("");
     
     
     const navigate = useNavigate();
@@ -40,6 +41,14 @@ export const Dashboard = () => {
 
     }, [user]);
 
+    const handleClick = async () => {
+        await addDoc(collection(db, "rooms"), {
+            name: roomName,
+            messages: [],
+            users: [user?.email]
+        });
+    }
+
     return (
         <div>
         {isLoading ?
@@ -52,8 +61,8 @@ export const Dashboard = () => {
                     <div className="dashboard-sidebar">
                         <h2>Create room:</h2>
                         
-                        <input className="dark-input mr-5" type="text" placeholder="Enter name" />
-                        <button type="submit" className="blue-btn">+</button>
+                        <input onChange={(e)=>{setName(e.target.value)}} className="dark-input mr-5" type="text" placeholder="Enter name" />
+                        <button onClick={handleClick} type="submit" className="blue-btn">+</button>
                     </div>
 
                     <div className="dasboard">
