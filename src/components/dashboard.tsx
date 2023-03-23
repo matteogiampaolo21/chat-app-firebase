@@ -1,16 +1,17 @@
 
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {addDoc, query, where, onSnapshot ,collection , DocumentData, } from "firebase/firestore";
+import {addDoc, query, where, onSnapshot ,collection , DocumentData,getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
-import { Room } from "../assets/types";
+import { Room, User } from "../assets/types";
 
 import "../styles/dashboard.css"
 export const Dashboard = () => {
 
     const [user] = useAuthState(auth);
     const [userRooms,setRooms] = useState<DocumentData>([]);
+    const [userFriend,setFriends] = useState<DocumentData>([])
     const [isLoading, setLoading] = useState<boolean>(true);
     const [roomName, setName] = useState<string>("");
     
@@ -21,9 +22,12 @@ export const Dashboard = () => {
         const readDocuments = async () => {
             
             const roomsRef = collection(db, "rooms");
-            const q = query(roomsRef, where("users", "array-contains", `${user?.email}`));
+            const usersRef = collection(db, "users");
+
+            const roomQ = query(roomsRef, where("users", "array-contains", `${user?.email}`));
+            const userQ = query(usersRef, where("email", "==", `${user?.email}`));
             
-            onSnapshot(q, (querySnapshot) => {
+            onSnapshot(roomQ, (querySnapshot) => {
                 const rooms:DocumentData = []
                 querySnapshot.forEach((doc) => {
                     const obj = doc.data();
@@ -31,6 +35,16 @@ export const Dashboard = () => {
                     rooms.push(obj);
                 });
                 setRooms(rooms)
+            })
+            onSnapshot(userQ, (querySnapshot) => {
+                const friends:DocumentData = []
+                querySnapshot.forEach((doc) => {
+                    const obj:DocumentData = doc.data();
+                    obj.friendsArray.forEach( (friend:string) => {
+                        friends.push(friend)
+                    })
+                });
+                setFriends(friends);
             })
             setLoading(false)
             
@@ -40,7 +54,8 @@ export const Dashboard = () => {
         readDocuments()
 
     }, [user]);
-
+    
+    
     const handleClick = async () => {
         await addDoc(collection(db, "rooms"), {
             name: roomName,
@@ -58,7 +73,7 @@ export const Dashboard = () => {
             { user ?
                 <div className="dasboard-grid">
 
-                    <div className="dashboard-sidebar">
+                    <div className="dashboard-sidebar diagonal-lines">
                         <h2>Create room:</h2>
                         
                         <input onChange={(e)=>{setName(e.target.value)}} className="dark-input mr-5" type="text" placeholder="Enter name" />
@@ -68,7 +83,7 @@ export const Dashboard = () => {
                     <div className="dasboard">
                         {userRooms.map( (doc:Room,index:number) => {
                             return(
-                                <div onClick={() => {navigate(`/dashboard/${doc.id}`)}} key={index} className="room-container">
+                                <div onClick={() => {navigate(`/dashboard/${doc.id}`)}} key={index} className="room-container triangle-dots">
                                     <h2 className="room-title ml-5">{doc.name}</h2>
                                     <div className="user-list">
                                         <p className="ml-5"><b>Users:</b> </p>
@@ -80,6 +95,18 @@ export const Dashboard = () => {
                                         })}
                                     </div>
                                 </div>
+                            )
+                        })}
+                    </div>
+
+                    <div className="friend-sidebar diagonal-lines">
+                        <h2>Friends:</h2>
+                        
+                        <input onChange={(e)=>{setName(e.target.value)}} className="dark-input mr-5" type="text" placeholder="Add friend" />
+                        <button onClick={handleClick} type="submit" className="blue-btn">+</button>
+                        {userFriend.map( (friend:String,index:number) => {
+                            return(
+                                <div className="friend-box" key={index}><p>{friend}</p></div>
                             )
                         })}
                     </div>

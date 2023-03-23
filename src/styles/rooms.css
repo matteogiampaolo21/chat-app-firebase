@@ -11,6 +11,7 @@
     border-radius: 5px;
     box-shadow: 2px 4px 15px var(--component-shadow);
     padding-left: 20px;
+    padding-right: 20px;
   }
   .message-box{
     background-color: var(--dark-component-bg);
@@ -29,4 +30,12 @@
   .message p {
     font-size: 1.2rem;
   }
-  
+  .add-user-box{
+    display: grid;
+    grid-template-columns: 83% 15%;
+    column-gap: 2%;
+  }
+  .add-user-box .dark-btn{
+    width:100%;
+    padding: 8px 6px;
+  }

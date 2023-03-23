@@ -1,6 +1,6 @@
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
-import { DocumentData, doc, getDoc, updateDoc } from "firebase/firestore";
+import { DocumentData, doc, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams} from "react-router-dom"
 import { Message } from "../assets/types";
@@ -13,22 +13,35 @@ export const Rooms = () => {
     const [userRoom, setRoom] = useState<DocumentData>({})
     const [isLoading, setLoading] = useState<boolean>(true)
     const [inputText, setText] = useState<string>("")
+    const [newUser, setNewUser] = useState<string>("")
     
     let { roomId } = useParams();
 
     useEffect(() => {
         const getDocument = async () => {
+
           const docRef = doc(db, "rooms", `${roomId}`);
-          const docSnap = await getDoc(docRef);
+
+          onSnapshot(docRef, (docSnap) => {
+            if (docSnap.exists()) {
+              const obj = docSnap.data();
+              obj.id = docSnap.id;
+              setRoom(obj);
+              setLoading(false)
+            } else {
+              console.log("No such document!");
+            }
+          })
+          // const docSnap = await getDoc(docRef);
           
-          if (docSnap.exists()) {
-            const obj = docSnap.data();
-            obj.id = docSnap.id;
-            setRoom(obj);
-            setLoading(false)
-          } else {
-            console.log("No such document!");
-          }
+          // if (docSnap.exists()) {
+          //   const obj = docSnap.data();
+          //   obj.id = docSnap.id;
+          //   setRoom(obj);
+          //   setLoading(false)
+          // } else {
+          //   console.log("No such document!");
+          // }
             
         }
         getDocument()
@@ -39,29 +52,49 @@ export const Rooms = () => {
       const timeSent = (new Date()).toString();
       const currentMessageArray:Message[] = (userRoom.messages)
       currentMessageArray.push({timeDelivered:timeSent,text:inputText});
-      console.log(currentMessageArray)
+      
       const roomRef = doc(db, "rooms", `${roomId}`);
 
       await updateDoc(roomRef, {
         messages: currentMessageArray
       });
-      setText("")
+      setText("");
+    }
+    const handleAddUser = async () => {
+      const currentUserArray:string[] = (userRoom.users); 
+      currentUserArray.push(newUser);
+
+      const roomRef = doc(db, "rooms", `${roomId}`);
+
+      await updateDoc(roomRef, {
+        users: currentUserArray
+      });
+      setNewUser("");
+      
     }
 
     return (
       <div>
         { !isLoading ?
         <div className="single-room-grid">
-          <div className="sidebar">
+          <div className="sidebar diagonal-lines">
             <h2>{userRoom.name}</h2>
+            <div className="add-user-box">
+              <input onChange={(e)=>{setNewUser(e.target.value)}} value={newUser} className="dark-input" placeholder="Add user"></input>
+              <button onClick={handleAddUser} className="dark-btn green-hover">+</button>
+            </div>
+
+            <h3>User list:</h3>
+            <ul>
             {userRoom.users.map((user:string,index:number)=>{
               return(
-                <p key={index}>{user}</p>
+                <li key={index}><p>{user}</p></li>
               )
             })}
+            </ul>
             
           </div>
-          <div className="message-box">
+          <div className="message-box triangle-dots">
             <h2>Chat</h2>
             {userRoom.messages.map((message:Message,index:number)=>{
               return(

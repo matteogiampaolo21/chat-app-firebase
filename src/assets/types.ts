@@ -4,6 +4,11 @@ export type Room = {
     name:string,
     users:string[]
 }
+export type User = {
+    readonly email:string,
+    friendsArray:string[],
+    username:string
+}
 
 export type Message = {
     text:string,

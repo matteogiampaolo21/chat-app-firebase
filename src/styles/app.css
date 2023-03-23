@@ -90,3 +90,27 @@ body{
     color: #ffffff;
     border: solid 1px #ffffff;
 }
+.green-hover:hover{
+    background-color: #0bb957;
+    color: #ffffff;
+}
+.purple-hover:hover{
+    background-color: #8e00c1;
+    color: #ffffff;
+    
+}
+
+/* bg patterns */
+.two-circle-bg{
+    background: radial-gradient(circle at 60% 40%, #2e2e2e 25%, transparent 26%),radial-gradient(circle at 40% 60%, #303030 25%, transparent 26%) !important ;
+    background-size: 7em 12em !important;
+    background-color: var(--dark-component-bg) !important;
+    opacity: 1 !important;
+}
+.diagonal-lines{
+    background: repeating-linear-gradient( -25deg, #313131, #313131 20px, var(--dark-component-bg) 20px, var(--dark-component-bg) 100px );
+}
+.triangle-dots{
+    background-size: 80px 80px;
+    background-image:  repeating-linear-gradient(-30deg, #313131, #313131 5px, var(--dark-component-bg) 4px, var(--dark-component-bg));
+}

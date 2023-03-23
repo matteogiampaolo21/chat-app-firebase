@@ -1,21 +1,25 @@
 import { signOut} from "firebase/auth";
 import { auth } from "../config/firebase";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/navbar.css"
 
 
 export const Navbar = () => {
+  const navigate = useNavigate(); 
 
   const logOut = async () => {
     try{
         await signOut(auth)
+        navigate("/register")
+
     } catch(err){
         console.error(err)
     }
   }
 
   return (
-    <div className="navbar">
+    <div className="navbar diagonal-lines">
         <div className="navbar-grid">
           <div className="navbar-grid">
           <h1>Mercury</h1>
