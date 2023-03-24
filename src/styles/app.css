@@ -44,6 +44,18 @@ body{
 
 
 /* assets */
+.btn{
+    width: 2rem;
+    font-size: 0.8rem;
+    font-weight: bolder;
+    padding: 9px 6px;
+    background-color: var(--dark-bg-color);
+    color: var(--dark-font-color);
+    border: solid #393939 1px;
+    border-radius: 5px;
+    transition: 0.4s;
+    margin: 0 5px
+}
 .dark-btn{
     width: 100px;
     font-size: 1.2rem;
@@ -83,6 +95,8 @@ body{
     border: solid 0px;
     border: solid 1px var(--light-bg-blue);  
     border-radius: 5px;
+    height: 26px;
+    width: 26px;
     transition: 0.3s;
 }
 .blue-btn:hover{
@@ -93,11 +107,18 @@ body{
 .green-hover:hover{
     background-color: #0bb957;
     color: #ffffff;
+    border: solid 1px #ffffff;
 }
 .purple-hover:hover{
     background-color: #8e00c1;
     color: #ffffff;
+    border: solid 1px #ffffff;
     
+}
+.red-hover:hover{
+    background-color: #bd080b;
+    color: #ffffff;
+    border: solid 1px #ffffff;
 }
 
 /* bg patterns */

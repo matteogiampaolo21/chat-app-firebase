@@ -34,7 +34,7 @@
     transition: 0.3s;
   }
   .room-title:hover{
-    color: var(--light-bg-blue-2);
+    color: var(--light-bg-blue);
     cursor: pointer;
   }
   .user-list{
@@ -42,10 +42,14 @@
     flex-direction: row;
   }
   .friend-sidebar{
-    background-color: var(--dark-component-bg);
+    display: flex;
+    flex-direction: column;
+    row-gap: 35px;
+  }
+  .friend-sidebar-component{
+    padding:20px;
     border-radius: 5px;
     box-shadow: 2px 4px 15px var(--component-shadow);
-    padding-left: 20px;
   }
   .friend-box{
     padding: 10px 0;

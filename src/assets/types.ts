@@ -5,8 +5,10 @@ export type Room = {
     users:string[]
 }
 export type User = {
+    readonly id: string,
     readonly email:string,
     friendsArray:string[],
+    friendRequest:string[],
     username:string
 }
 
