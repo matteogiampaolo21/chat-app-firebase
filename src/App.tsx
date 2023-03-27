@@ -2,13 +2,13 @@
 import './styles/app.css'
 import { useAuthState} from "react-firebase-hooks/auth"
 import { Navbar } from "./components/navbar"
-import { AuthLogin } from './components/authLogin'
-import { AuthRegister } from './components/authRegister'
-import { Dashboard } from './components/dashboard'
+import { AuthLogin } from './pages/authLogin'
+import { AuthRegister } from './pages/authRegister'
+import { Dashboard } from './pages/dashboard'
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import { auth } from './config/firebase'
-import { Home } from './components/home';
-import { Rooms } from "./components/rooms"
+import { Home } from './pages/home';
+import { Rooms } from "./pages/rooms"
 
 function App() {
   

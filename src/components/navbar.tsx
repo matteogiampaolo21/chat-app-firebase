@@ -11,7 +11,7 @@ export const Navbar = () => {
   const logOut = async () => {
     try{
         await signOut(auth)
-        navigate("/register")
+        navigate("/login")
 
     } catch(err){
         console.error(err)

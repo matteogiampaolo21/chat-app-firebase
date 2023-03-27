@@ -1,10 +1,12 @@
 
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {addDoc, query, where, onSnapshot ,collection , DocumentData,updateDoc, doc, getDocs } from "firebase/firestore";
+import {addDoc, query, where, onSnapshot ,collection , DocumentData,updateDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
-import { Room, User } from "../assets/types";
+import { Room, User, FriendRequest } from "../assets/types";
+
+import { ContactList } from "../components/contactList";
 
 import "../styles/dashboard.css"
 export const Dashboard = () => {
@@ -33,6 +35,7 @@ export const Dashboard = () => {
             
             const roomsRef = collection(db, "rooms");
             const usersRef = collection(db, "users");
+            
 
             const roomQ = query(roomsRef, where("users", "array-contains", `${user?.email}`));
             const userQ = query(usersRef, where("email", "==", `${user?.email}`));
@@ -87,7 +90,7 @@ export const Dashboard = () => {
                 
             
             const userFriendReq = (querySnapshot.docs[0].data().friendRequest);
-            userFriendReq.push(user?.email)
+            userFriendReq.push({email:user?.email,id:userAccount.id})
                     
             const friendRef = doc(db, "users", querySnapshot.docs[0].id);
                     
@@ -102,19 +105,41 @@ export const Dashboard = () => {
     }
 
     const acceptRequest = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        const currentEvent = JSON.parse(e.currentTarget.value)
         
         const userRef = doc(db, "users", userAccount.id);
+        
+        // update user that sent friend request
+        const otherUserRef = doc(db,"users", currentEvent.id)
+        const docSnap = await getDoc(otherUserRef);
+        if (!docSnap.exists()){return ("error")}
+        const otherUserData:DocumentData = docSnap.data();
+        const otherFriendArray:string[] = (otherUserData.friendsArray)
+        otherFriendArray.push(userAccount.email);
+
+        await updateDoc(otherUserRef, {
+            friendsArray: otherFriendArray,
+
+        });
+
+
+        
 
         const currentFriendArray:string[] = (userAccount.friendsArray);
-        let currentRequestArray:string[] = (userAccount.friendRequest);
-
-        currentFriendArray.push(e.currentTarget.value);
-        currentRequestArray = currentRequestArray.filter((word) => {word !== e.currentTarget.value});
+        let currentRequestArray:FriendRequest[] = (userAccount.friendRequest);
+        
+        currentFriendArray.push(currentEvent.email);
+        currentRequestArray = currentRequestArray.filter((word) => {word.email !== currentEvent.email});
         
 
         await updateDoc(userRef, {
           friendsArray: currentFriendArray,
           friendRequest: currentRequestArray
+        });
+        
+        await addDoc(collection(db, "contacts"), {
+            messages:[],
+            users:[userAccount.email,otherUserData.email]
         });
         
     }
@@ -142,11 +167,11 @@ export const Dashboard = () => {
                         {userAccount.friendRequest.length === 0 ?
                         <div>you have no one.</div> 
                         :
-                        userAccount.friendRequest.map((person:string,index:number)=>{
+                        userAccount.friendRequest.map((person:FriendRequest,index:number)=>{
                             return(
                                 <div key={index}>
-                                    {person}
-                                    <button onClick={(e) => {acceptRequest(e)}} value={person} className="btn green-hover">Y</button>
+                                    {person.email}
+                                    <button onClick={(e) => {acceptRequest(e)}} value={JSON.stringify(person)} className="btn green-hover">Y</button>
                                     <button onClick={declineRequest} className="btn red-hover">N</button>
                                 </div>
                             )
@@ -184,15 +209,7 @@ export const Dashboard = () => {
                             {userAccount.friendsArray.length === 0 ?
                             <div>you have no friends.</div> 
                             :
-                            <ul>
-                                {userAccount.friendsArray.map((person:string,index:number)=>{
-                                    return(
-                                        <li key={index}><div >
-                                            {person}
-                                        </div></li>
-                                    )
-                                })}
-                            </ul>
+                            <ContactList/>
                             }
                         
                         </div>
