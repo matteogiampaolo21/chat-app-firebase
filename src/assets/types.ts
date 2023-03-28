@@ -7,7 +7,8 @@ export type Room = {
 export type Contact = {
     readonly id:string,
     messages:Message[],
-    users:string[]
+    users:string,
+
 }
 
 export type User = {

@@ -2,11 +2,12 @@
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {addDoc, query, where, onSnapshot ,collection , DocumentData,updateDoc, doc, getDoc, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 import { Room, User, FriendRequest } from "../assets/types";
 
-import { ContactList } from "../components/contactList";
+// import { ContactList } from "../components/contactList";
+const ContactList = React.lazy(() => import("../components/contactList"))
 
 import "../styles/dashboard.css"
 export const Dashboard = () => {
@@ -139,7 +140,7 @@ export const Dashboard = () => {
         
         await addDoc(collection(db, "contacts"), {
             messages:[],
-            users:[userAccount.email,otherUserData.email]
+            users:`${userAccount.email},${otherUserData.email}`
         });
         
     }
@@ -205,13 +206,7 @@ export const Dashboard = () => {
                             <h2>Friends :</h2>
                             <input onChange={(e)=>{setFriendName(e.target.value)}} value={friendName} className="dark-input mr-5" type="text" placeholder="Add friend" />
                             <button onClick={handleAddFriend} type="button" className="blue-btn mb-5">+</button>
-                            
-                            {userAccount.friendsArray.length === 0 ?
-                            <div>you have no friends.</div> 
-                            :
                             <ContactList/>
-                            }
-                        
                         </div>
                         
                     </div>
