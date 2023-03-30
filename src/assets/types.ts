@@ -25,6 +25,7 @@ export type FriendRequest = {
 }
 
 export type Message = {
+    user:string,
     text:string,
     timeDelivered:string
 }

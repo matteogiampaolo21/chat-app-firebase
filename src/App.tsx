@@ -9,6 +9,7 @@ import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import { auth } from './config/firebase'
 import { Home } from './pages/home';
 import { Rooms } from "./pages/rooms"
+import { Contact } from "./pages/contact"
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
         <Route path='/login' element={<AuthLogin/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/:roomId' element={<Rooms/>} />
+        <Route path='/contacts/:contactId' element={<Contact/>} />
       </Routes>
     </Router>
   )

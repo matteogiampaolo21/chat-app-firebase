@@ -68,5 +68,6 @@
   .friend:hover{
     padding:0px 25px;
     cursor: pointer;
+    color:var(--light-bg-blue)
     
   }

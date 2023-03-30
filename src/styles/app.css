@@ -135,3 +135,11 @@ body{
     background-size: 80px 80px;
     background-image:  repeating-linear-gradient(-30deg, #313131, #313131 5px, var(--dark-component-bg) 4px, var(--dark-component-bg));
 }
+
+
+
+/*  */
+.time-sent{
+    font-size: 0.8rem;
+    opacity: 0.3;
+}
