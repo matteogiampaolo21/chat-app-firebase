@@ -75,6 +75,19 @@ export const Rooms = () => {
       setNewUser("");
       
     }
+    const removeUser = async (userEmail:string) => {
+      
+      
+      const roomRef = doc(db, "rooms", `${roomId}`);
+
+      let currentUserArray:string[] = (userRoom.users);
+      
+      currentUserArray = currentUserArray.filter(word => word !== userEmail);
+      
+      await updateDoc(roomRef, {
+        users: currentUserArray
+      });
+    }
     
 
     return (
@@ -89,13 +102,16 @@ export const Rooms = () => {
             </div>
 
             <h3>User list:</h3>
-            <ul>
+            
             {userRoom.users.map((user:string,index:number)=>{
               return(
-                <li key={index}><p>{user}</p></li>
+                
+                  <p>{user}<button onClick={() => {removeUser(user)}} className="btn ml-5 red-hover">-</button></p>
+                  
+                
               )
             })}
-            </ul>
+            
             
           </div>
           <div className="message-box triangle-dots">

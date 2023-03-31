@@ -1,6 +1,6 @@
 .single-room-grid{
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 25% 75%;
     margin: 100px 50px;
     justify-content: center;
     column-gap: 20px;

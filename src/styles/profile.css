@@ -1,0 +1,15 @@
+.profile-card{
+    background-color: var(--dark-component-bg);
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 4px 15px var(--component-shadow);
+    display: grid;
+    grid-template-columns: 40% 40%;
+    column-gap: 10%;
+}
+.profile-flex-item{
+    display: flex;
+    flex-direction: row;
+}

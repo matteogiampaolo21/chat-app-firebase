@@ -67,6 +67,7 @@ export const ContactList = () => {
 
   return (
     <div className="contacts-list">
+      
       {userAccount.friendsArray.map((friend:string,index:number) => {
         return(
           <div onClick={()=>{handleClick(friend)}} key={index} className="friend">

@@ -144,7 +144,17 @@ export const Dashboard = () => {
         });
         
     }
-    const declineRequest = () => {
+    const declineRequest = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        const currentEvent = JSON.parse(e.currentTarget.value)
+        const userRef = doc(db, "users", userAccount.id);
+
+        let currentRequestArray:FriendRequest[] = (userAccount.friendRequest);
+            
+        currentRequestArray = currentRequestArray.filter((word) => {word.email !== currentEvent.email});
+
+        await updateDoc(userRef, {
+          friendRequest: currentRequestArray
+        });
         
     }
 
@@ -173,7 +183,7 @@ export const Dashboard = () => {
                                 <div key={index}>
                                     {person.email}
                                     <button onClick={(e) => {acceptRequest(e)}} value={JSON.stringify(person)} className="btn green-hover">Y</button>
-                                    <button onClick={declineRequest} className="btn red-hover">N</button>
+                                    <button onClick={(e) => {declineRequest(e)}} value={JSON.stringify(person)} className="btn red-hover">N</button>
                                 </div>
                             )
                         })
@@ -214,9 +224,6 @@ export const Dashboard = () => {
                 </div>
             :
                 <div>
-                    <h1>You were not signed in.</h1>
-                    <button onClick={()=>{navigate("/register")}} className="btn">Register Today!</button>
-                    <button onClick={()=>{navigate("/login")}} className="btn">Login here!</button>
                 </div>
             }
         </div>

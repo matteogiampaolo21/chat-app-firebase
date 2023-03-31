@@ -10,6 +10,7 @@ import { auth } from './config/firebase'
 import { Home } from './pages/home';
 import { Rooms } from "./pages/rooms"
 import { Contact } from "./pages/contact"
+import { Profile } from './pages/profile'
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
         <Route path='/register' element={<AuthRegister/>}/>
         <Route path='/login' element={<AuthLogin/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>
+        <Route path='/profile' element={<Profile />}/>
         <Route path='/dashboard/:roomId' element={<Rooms/>} />
         <Route path='/contacts/:contactId' element={<Contact/>} />
       </Routes>

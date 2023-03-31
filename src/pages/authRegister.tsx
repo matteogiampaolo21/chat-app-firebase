@@ -18,7 +18,7 @@ export const AuthRegister = () => {
             await addDoc(collection(db, "users"), {
                 username: inputUsername,
                 email: inputEmail,
-                nickname: inputUsername,
+                friendRequest: [],
                 friendsArray: []
             });
             navigate("/dashboard")
