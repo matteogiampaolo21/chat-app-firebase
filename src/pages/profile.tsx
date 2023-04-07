@@ -1,6 +1,6 @@
 import { auth, db } from "../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { query, where, onSnapshot ,collection , DocumentData } from "firebase/firestore";
+import { query, where, onSnapshot ,collection , DocumentData, updateDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { User } from "../assets/types";
@@ -15,6 +15,8 @@ import "../styles/profile.css"
 export const Profile = () => {
     const [user] = useAuthState(auth);
     const [isLoading, setLoading] = useState<boolean>(true);
+
+    const [newUsername, setUsername] = useState<string>("")
 
     const [userAccount,setUserAccount] = useState<User>({
         id:"",
@@ -46,6 +48,18 @@ export const Profile = () => {
         readDocuments()
 
     }, [user]);
+
+    const handleNameChange = async () =>{
+      
+      const contactsRef = doc(db, "users", `${userAccount.id}`);
+
+      await updateDoc(contactsRef, {
+        username: newUsername
+      });
+      setUsername("");
+    }
+
+    
     
     
 
@@ -59,12 +73,17 @@ export const Profile = () => {
                 <div className="profile-card triangle-dots">
                     
                     <div className="profile-flex-item">
-                        <input className="dark-input" type="text" placeholder={userAccount.username} />
-                        <button className="ml-5 dark-btn">Change</button>
+                        <h1>Change Username:</h1>
+                        <div className="username-form">
+                            <input onChange={(e)=>{setUsername(e.target.value)}} value={newUsername} className="dark-input" type="text" placeholder={userAccount.username} />
+                            <button onClick={handleNameChange} className="ml-5 dark-btn">Change</button>
+                        </div>
                     </div>
                     <div className="profile-flex-item">
-                        <ContactList/>
-                        <button className="ml-5 dark-btn">Remove</button>
+                        <h1>Friends List:</h1>
+                        <div className="username-form">
+                            <ContactList/>
+                        </div>
                     </div>
                     
                 </div>

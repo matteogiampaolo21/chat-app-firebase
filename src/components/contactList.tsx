@@ -1,7 +1,7 @@
 import { useEffect, useState} from "react";
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {query, where, onSnapshot ,collection , DocumentData, or} from "firebase/firestore";
+import {query, where, onSnapshot ,collection , DocumentData, or, updateDoc, doc} from "firebase/firestore";
 import { User } from "../assets/types";
 import {useNavigate} from "react-router-dom"
 import { async } from "@firebase/util";
@@ -64,14 +64,28 @@ export const ContactList = () => {
   
   
   }
+  const removeFriend = async (friend:string) => {
+    let currentFriendsArray = userAccount.friendsArray;
+    currentFriendsArray = currentFriendsArray.filter((word) => {word !== friend});
+    
+    const contactsRef = doc(db, "users", `${userAccount.id}`);
+
+    await updateDoc(contactsRef, {
+      friendsArray: currentFriendsArray
+    });
+        
+  }
 
   return (
     <div className="contacts-list">
       
       {userAccount.friendsArray.map((friend:string,index:number) => {
         return(
-          <div onClick={()=>{handleClick(friend)}} key={index} className="friend">
-            <p>{friend}</p>
+          <div className="flex-row">
+            <div onClick={()=>{handleClick(friend)}} key={index} className="friend">
+              <p>{friend}</p>
+            </div>
+            <button onClick={()=>{removeFriend(friend)}} className="dark-btn red-hover ml-5">Remove</button>
           </div>
         )
       })}

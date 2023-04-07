@@ -23,30 +23,18 @@ export const Navbar = () => {
   return (
     
     <div className="navbar diagonal-lines">
-      {!user ?
+      <div className="navbar-grid">
         <div className="navbar-grid">
-          <div className="navbar-grid">
-          <h1>Mercury</h1>
-          <a className="nav-link" href="/">Home</a>
-          <a className="nav-link" href="/register">Register</a>
-          <a className="nav-link" href="/login">Login</a>
-          </div>
-          
-          
-        </div>
-      :
-        <div className="navbar-grid">
-          <div className="navbar-grid">
           <h1>Mercury</h1>
           <a className="nav-link" href="/">Home</a>
           <a className="nav-link" href="/dashboard">Dashboard</a>
           <a className="nav-link" href="/profile">Profile</a>
-          
-          </div>
-          <button className="dark-btn ml-5 mr-5" onClick={logOut}>Sign Out</button>
-          
+          <a className="nav-link" href="/register">Register</a>
+          <a className="nav-link" href="/login">Login</a>
         </div>
-      }
+          
+        <button className="dark-btn ml-5 mr-5" onClick={logOut}>Sign Out</button>
+      </div>
     </div>
   )
 }
