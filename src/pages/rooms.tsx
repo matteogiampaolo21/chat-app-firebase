@@ -2,7 +2,7 @@ import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import { DocumentData, doc, updateDoc, onSnapshot, query, where, collection,getDocs} from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams} from "react-router-dom"
+import { useNavigate, useParams} from "react-router-dom"
 import { Message } from "../assets/types";
 import "../styles/rooms.css"
 
@@ -16,6 +16,8 @@ export const Rooms = () => {
     const [newUser, setNewUser] = useState<string>("")
 
     const [nickname,setNickname] = useState<string>("")
+
+    const navigate = useNavigate();
     
     let { roomId } = useParams();
 
@@ -33,10 +35,18 @@ export const Rooms = () => {
 
           onSnapshot(roomRef, (docSnap) => {
             if (docSnap.exists()) {
-              const obj = docSnap.data();
-              obj.id = docSnap.id;
-              setRoom(obj);
-              setLoading(false)
+              if (user && docSnap.data().users.includes(user.email)){
+                const obj = docSnap.data();
+                obj.id = docSnap.id;
+                setRoom(obj);
+                setLoading(false)
+              }else{
+                
+                navigate("/dashboard")
+                alert("You do not have access to this room");
+                
+              }
+              
             } else {
               console.log("No such document!");
             }
@@ -88,6 +98,15 @@ export const Rooms = () => {
         users: currentUserArray
       });
     }
+
+    const checkAuth = () => {
+      if (user && userRoom.users.includes(user.email)){
+        return true
+      }
+      else{
+        return false
+      }
+    }
     
 
     return (
@@ -116,7 +135,7 @@ export const Rooms = () => {
           </div>
           <div className="message-box triangle-dots">
             <h2>Chat</h2>
-            {userRoom.messages.map((message:Message,index:number)=>{
+            {userRoom.messages.slice(-25).map((message:Message,index:number)=>{
               return(
                 <div key={index} className="message">
                   <p><b>{message.user}</b> : {message.text} <span className="time-sent">{`${new Date(message.timeDelivered).getHours()}:${new Date(message.timeDelivered).getMinutes()}`}</span></p>

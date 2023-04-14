@@ -85,7 +85,7 @@ export const ContactList = () => {
             <div onClick={()=>{handleClick(friend)}} key={index} className="friend">
               <p>{friend}</p>
             </div>
-            <button onClick={()=>{removeFriend(friend)}} className="dark-btn red-hover ml-5">Remove</button>
+            <button onClick={()=>{removeFriend(friend)}} style={{fontSize: "1rem"}} className="dark-btn red-hover ml-5">Remove</button>
           </div>
         )
       })}

@@ -2,7 +2,7 @@ import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import { DocumentData, doc, getDoc, updateDoc, onSnapshot, collection, where, query} from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams} from "react-router-dom"
+import { useParams, useNavigate} from "react-router-dom"
 import { Message } from "../assets/types";
 import "../styles/rooms.css"
 
@@ -15,7 +15,7 @@ export const Contact = () => {
 
     const [nickname,setNickname] = useState<string>("")
     
-    
+    const navigate = useNavigate();
     let { contactId } = useParams();
 
     useEffect(() => {
@@ -32,14 +32,22 @@ export const Contact = () => {
 
           onSnapshot(contactsRef, (docSnap) => {
             if (docSnap.exists()) {
-              const obj = docSnap.data();
-              obj.id = docSnap.id;
-              setContact(obj);
-              setLoading(false);
-              setList(obj.users.split(","))
+              if (user && docSnap.data().users.includes(user.email)){
+                const obj = docSnap.data();
+                obj.id = docSnap.id;
+                setContact(obj);
+                setLoading(false)
+                setList(obj.users.split(","))
+              }else{
+                
+                navigate("/dashboard")
+                alert("You do not have access to this contact");
+                
+              }
             } else {
               console.log("No such document!");
             }
+            
           })
         }
         getDocument()
@@ -67,7 +75,7 @@ export const Contact = () => {
         { !isLoading ?
         <div className="single-room-grid">
           <div className="sidebar diagonal-lines">
-            <h3>User list:</h3>
+            <h2>User list:</h2>
               <p>{friendList[0]}</p>
               <p>{friendList[1]}</p>
           </div>
