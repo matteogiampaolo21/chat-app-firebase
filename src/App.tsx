@@ -7,7 +7,6 @@ import { AuthRegister } from './pages/authRegister'
 import { Dashboard } from './pages/dashboard'
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import { auth } from './config/firebase'
-import { Home } from './pages/home';
 import { Rooms } from "./pages/rooms"
 import { Contact } from "./pages/contact"
 import { Profile } from './pages/profile'
@@ -20,7 +19,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home/>}/>
+        
         <Route path='/register' element={<AuthRegister/>}/>
         <Route path='/login' element={<AuthLogin/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>

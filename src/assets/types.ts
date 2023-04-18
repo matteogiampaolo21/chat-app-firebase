@@ -1,6 +1,7 @@
+import { Timestamp } from "firebase/firestore"
+
 export type Room = {
     readonly id:string,
-    messages:Message[],
     name:string,
     users:string[]
 }
@@ -25,7 +26,11 @@ export type FriendRequest = {
 }
 
 export type Message = {
-    user:string,
-    text:string,
-    timeDelivered:string
+    readonly id: string,
+    createdAt: string,
+    location: string,
+    locationID:string,
+    message: string,
+    user: string,
+    firebaseCreatedAt: Timestamp,
 }

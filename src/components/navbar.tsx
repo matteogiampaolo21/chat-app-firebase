@@ -26,7 +26,6 @@ export const Navbar = () => {
       <div className="navbar-grid">
         <div className="navbar-grid">
           <h1>Mercury</h1>
-          <a className="nav-link" href="/">Home</a>
           <a className="nav-link" href="/dashboard">Dashboard</a>
           <a className="nav-link" href="/profile">Profile</a>
           <a className="nav-link" href="/register">Register</a>
