@@ -1,7 +1,7 @@
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import { DocumentData, doc,addDoc, serverTimestamp, onSnapshot, collection, where, query,limit, orderBy} from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useParams, useNavigate} from "react-router-dom"
 import { Message } from "../assets/types";
 import "../styles/rooms.css"
@@ -80,7 +80,8 @@ export const Contact = () => {
     }, [user]);
 
 
-    const handleClick = async () => {
+    const handleClick = async (e:FormEvent) => {
+      e.preventDefault()
     
       const timeSent = (new Date()).toString();
 
@@ -117,7 +118,7 @@ export const Contact = () => {
             })}
             <form className="message-form">
               <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
-              <button onClick={handleClick} className="dark-btn" type="button">Send</button>
+              <button onClick={(e) => {handleClick(e)}} className="dark-btn" type="submit">Send</button>
             </form>
           </div>
         </div>

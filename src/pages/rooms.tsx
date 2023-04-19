@@ -1,8 +1,8 @@
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import { DocumentData, doc,getDocs, updateDoc, onSnapshot, query, where, collection, addDoc, serverTimestamp, orderBy, limit, QuerySnapshot} from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams} from "react-router-dom"
+import { FormEvent, useEffect, useState } from "react";
+import { useNavigate, useParams, Navigate} from "react-router-dom"
 import { Message } from "../assets/types";
 import "../styles/rooms.css"
 
@@ -81,8 +81,8 @@ export const Rooms = () => {
 
     }, [user]);
 
-    const handleClick = async () => {
-    
+    const handleClick = async (e:FormEvent) => {
+      e.preventDefault()
       const timeSent = (new Date()).toString();
 
       await addDoc(collection(db, "messages"), {
@@ -129,41 +129,49 @@ export const Rooms = () => {
     return (
       <div>
         { !isLoading ?
-        <div className="single-room-grid">
+        <div>
+
+          { (user && userRoom.users.includes(user.email)) ?
+            <div className="single-room-grid">
 
 
-          <div className="sidebar diagonal-lines">
+              <div className="sidebar diagonal-lines">
 
-            <h2>{userRoom.name}</h2>
-            <div className="add-user-box">
-              <input onChange={(e)=>{setNewUser(e.target.value)}} value={newUser} className="dark-input" placeholder="Add user"></input>
-              <button onClick={handleAddUser} className="dark-btn green-hover">+</button>
-            </div>
-
-            <h3>User list:</h3>
-            {userRoom.users.map((user:string,index:number)=>{
-              return(
-                  <p key={index}>{user}<button onClick={() => {removeUser(user)}} className="btn ml-5 red-hover">-</button></p>
-              )
-            })}     
-                               
-          </div>
-
-
-          <div className="message-box triangle-dots">
-            <h2>Chat</h2>
-            {roomMessages.map((messages:Message,index:number)=>{
-              return(
-                <div key={index} className="message">
-                  <p><b>{messages.user}</b> : {messages.message} <span className="time-sent">{`${new Date(messages.createdAt).getHours()}:${new Date(messages.createdAt).getMinutes()}`}</span></p>
+                <h2>{userRoom.name}</h2>
+                <div className="add-user-box">
+                  <input onChange={(e)=>{setNewUser(e.target.value)}} value={newUser} className="dark-input" placeholder="Add user"></input>
+                  <button onClick={handleAddUser} className="dark-btn green-hover">+</button>
                 </div>
-              )
-            })}
-            <form className="message-form">
-              <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
-              <button onClick={handleClick} className="dark-btn" type="button">Send</button>
-            </form>
+
+                <h3>User list:</h3>
+                {userRoom.users.map((user:string,index:number)=>{
+                  return(
+                      <p key={index}>{user}<button onClick={() => {removeUser(user)}} className="btn ml-5 red-hover">-</button></p>
+                  )
+                })}     
+                                  
+              </div>
+
+
+              <div className="message-box triangle-dots">
+                <h2>Chat</h2>
+                {roomMessages.map((messages:Message,index:number)=>{
+                  return(
+                    <div key={index} className="message">
+                      <p><b>{messages.user}</b> : {messages.message} <span className="time-sent">{`${new Date(messages.createdAt).getHours()}:${new Date(messages.createdAt).getMinutes()}`}</span></p>
+                    </div>
+                  )
+                })}
+                <form className="message-form">
+                  <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
+                  <button onClick={(e) => {handleClick(e)}} className="dark-btn" type="submit">Send</button>
+                </form>
+              </div>
           </div>
+          
+          : <Navigate replace to="/dashboard" /> }
+
+
         </div>
         :
         <div></div>

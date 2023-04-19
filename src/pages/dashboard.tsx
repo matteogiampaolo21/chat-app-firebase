@@ -196,7 +196,7 @@ export const Dashboard = () => {
                     <div className="dasboard">
                         {userRooms.map( (doc:Room,index:number) => {
                             return(
-                                <div onClick={() => {navigate(`/dashboard/${doc.id}`)}} key={index} className="room-container triangle-dots">
+                                <div onClick={() => {navigate(`/dashboard/rooms/${doc.id}`)}} key={index} className="room-container triangle-dots">
                                     <h2 className="room-title ml-5">{doc.name}</h2>
                                     <div className="user-list">
                                         <p className="ml-5">{doc.users.length} users in this room.</p>
