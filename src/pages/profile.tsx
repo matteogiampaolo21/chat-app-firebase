@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { query, where, onSnapshot ,collection , DocumentData, updateDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { User } from "../assets/types";
+import { User } from "../assets/utilities";
 
 
 
@@ -81,7 +81,7 @@ export const Profile = () => {
                     </div>
                     <div className="profile-flex-item">
                         <h1>Friends List:</h1>
-                        <div className="username-form">
+                        <div className="">
                             <ContactList/>
                         </div>
                     </div>

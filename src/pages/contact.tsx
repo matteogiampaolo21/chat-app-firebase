@@ -2,13 +2,13 @@ import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import { DocumentData, doc,addDoc, serverTimestamp, onSnapshot, collection, where, query,limit, orderBy} from "firebase/firestore";
 import { FormEvent, useEffect, useState } from "react";
-import { useParams, useNavigate} from "react-router-dom"
-import { Message } from "../assets/types";
+import { useParams, useNavigate, Navigate} from "react-router-dom"
+import { Message } from "../assets/utilities";
 import "../styles/rooms.css"
 
 export const Contact = () => {
     const [user] = useAuthState(auth);
-    const [contactsID, setContactID] = useState<string>("")
+    const [contactsRoom, setContact] = useState<DocumentData>({})
     const [contactMessages, setMessages] = useState<Message[]>([])
     const [isLoading, setLoading] = useState<boolean>(true)
     const [inputText, setText] = useState<string>("");
@@ -58,17 +58,13 @@ export const Contact = () => {
 
           onSnapshot(contactsRef, (docSnap) => {
             if (docSnap.exists()) {
-              if (user && docSnap.data().users.includes(user.email)){
-                const obj = docSnap.data();
-                setContactID(docSnap.id);
-                setLoading(false)
-                setList(obj.users.split(","))
-              }else{
-                
-                navigate("/dashboard")
-                alert("You do not have access to this contact");
-                
-              }
+              
+              const obj = docSnap.data();
+              obj.id = docSnap.id
+              setContact(obj);
+              setLoading(false)
+              setList(obj.users.split(","))
+              
             } else {
               console.log("No such document!");
             }
@@ -88,7 +84,7 @@ export const Contact = () => {
       await addDoc(collection(db, "messages"), {
         createdAt: timeSent,
         location: "contact",
-        locationID:contactsID,
+        locationID:contactsRoom.id,
         message: inputText,
         user: nickname,
         firebaseCreatedAt: serverTimestamp(),
@@ -101,26 +97,30 @@ export const Contact = () => {
     return (
       <div>
         { !isLoading ?
-        <div className="single-room-grid">
-          <div className="sidebar diagonal-lines">
-            <h2>User list:</h2>
-              <p>{friendList[0]}</p>
-              <p>{friendList[1]}</p>
+        <div>
+          {(user && contactsRoom.users.includes(user.email)) ?
+          <div className="single-room-grid">
+            <div className="sidebar diagonal-lines">
+              <h2>User list:</h2>
+                <p>{friendList[0]}</p>
+                <p>{friendList[1]}</p>
+            </div>
+            <div className="message-box triangle-dots">
+              <h2>Chat</h2>
+              {contactMessages.map((messages:Message,index:number)=>{
+                return(
+                  <div key={index} className="message">
+                    <p><b>{messages.user}</b> : {messages.message} <span className="time-sent">{`${new Date(messages.createdAt).getHours()}:${new Date(messages.createdAt).getMinutes()}`}</span></p>
+                  </div>
+                )
+              })}
+              <form className="message-form">
+                <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
+                <button onClick={(e) => {handleClick(e)}} className="dark-btn" type="submit">Send</button>
+              </form>
+            </div>
           </div>
-          <div className="message-box triangle-dots">
-            <h2>Chat</h2>
-            {contactMessages.map((messages:Message,index:number)=>{
-              return(
-                <div key={index} className="message">
-                  <p><b>{messages.user}</b> : {messages.message} <span className="time-sent">{`${new Date(messages.createdAt).getHours()}:${new Date(messages.createdAt).getMinutes()}`}</span></p>
-                </div>
-              )
-            })}
-            <form className="message-form">
-              <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
-              <button onClick={(e) => {handleClick(e)}} className="dark-btn" type="submit">Send</button>
-            </form>
-          </div>
+          : <Navigate replace to="/dashboard" /> }
         </div>
         :
         <div></div>

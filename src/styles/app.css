@@ -41,12 +41,14 @@ body{
 .max-width{
     width: 100% !important;
 }
-.flex-row{
-    display: flex;
-    flex-direction: row;
-}
+
 
 /* assets */
+.contacts-list-flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .btn{
     width: 2rem;
     font-size: 0.8rem;

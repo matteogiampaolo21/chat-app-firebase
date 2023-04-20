@@ -4,7 +4,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {addDoc, query, where, onSnapshot ,collection , DocumentData,updateDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
-import { Room, User, FriendRequest } from "../assets/types";
+import { Room, User, FriendRequest } from "../assets/utilities";
 
 // import { ContactList } from "../components/contactList";
 const ContactList = React.lazy(() => import("../components/contactList"))
@@ -71,7 +71,6 @@ export const Dashboard = () => {
     const createRoom = async () => {
         await addDoc(collection(db, "rooms"), {
             name: roomName,
-            messages: [],
             users: [user?.email]
         });
     }
@@ -139,7 +138,6 @@ export const Dashboard = () => {
         });
         
         await addDoc(collection(db, "contacts"), {
-            messages:[],
             users:`${userAccount.email},${otherUserData.email}`
         });
         

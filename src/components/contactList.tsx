@@ -2,9 +2,10 @@ import { useEffect, useState} from "react";
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {query, where, onSnapshot ,collection , DocumentData, or, updateDoc, doc} from "firebase/firestore";
-import { User } from "../assets/types";
+import { User } from "../assets/utilities";
 import {useNavigate} from "react-router-dom"
 import { async } from "@firebase/util";
+import { smallText } from "../assets/utilities";
 
 
 export const ContactList = () => {
@@ -81,9 +82,9 @@ export const ContactList = () => {
       
       {userAccount.friendsArray.map((friend:string,index:number) => {
         return(
-          <div key={index} className="flex-row">
+          <div key={index} className="contacts-list-flex-row mt-5">
             <div onClick={()=>{handleClick(friend)}} className="friend">
-              <p>{friend}</p>
+              <p>{smallText(friend, 23)}</p>
             </div>
             <button onClick={()=>{removeFriend(friend)}} style={{fontSize: "1rem"}} className="dark-btn red-hover ml-5">Remove</button>
           </div>

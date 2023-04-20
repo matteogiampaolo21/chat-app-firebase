@@ -33,3 +33,16 @@ export type Message = {
     user: string,
     firebaseCreatedAt: Timestamp,
 }
+
+export const smallText = (text:string,limit:number) => {
+    let newText = '';
+    for (let i = 0;i < limit;i++){
+      if(text[i] === undefined){
+        return text;
+      }else{
+        newText += text[i]; 
+      }
+    }
+    newText += '...';
+    return newText;
+}

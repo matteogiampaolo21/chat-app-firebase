@@ -3,7 +3,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import { DocumentData, doc,getDocs, updateDoc, onSnapshot, query, where, collection, addDoc, serverTimestamp, orderBy, limit, QuerySnapshot} from "firebase/firestore";
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams, Navigate} from "react-router-dom"
-import { Message } from "../assets/types";
+import { Message } from "../assets/utilities";
 import "../styles/rooms.css"
 
 export const Rooms = () => {
