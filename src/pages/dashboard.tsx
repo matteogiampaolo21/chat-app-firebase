@@ -140,6 +140,12 @@ export const Dashboard = () => {
         await addDoc(collection(db, "contacts"), {
             users:`${userAccount.email},${otherUserData.email}`
         });
+        // const contactsRef = collection(db, "contacts");
+        // const contactQ = query(contactsRef, or(
+        // where("users", "==", `${user?.email},${friend}`),
+        // where("users", "==", `${friend},${user?.email}`)
+        // )
+        // );
         
     }
     const declineRequest = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

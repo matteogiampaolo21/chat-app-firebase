@@ -1,7 +1,7 @@
 import { useEffect, useState} from "react";
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {query, where, onSnapshot ,collection , DocumentData, or, updateDoc, doc} from "firebase/firestore";
+import {query,getDocs, where, onSnapshot ,collection , DocumentData, or, updateDoc, doc} from "firebase/firestore";
 import { User } from "../assets/utilities";
 import {useNavigate} from "react-router-dom"
 import { async } from "@firebase/util";
@@ -66,14 +66,39 @@ export const ContactList = () => {
   
   }
   const removeFriend = async (friend:string) => {
+
+
+    // Delete from current user 
     let currentFriendsArray = userAccount.friendsArray;
-    currentFriendsArray = currentFriendsArray.filter((word) => {word !== friend});
+    currentFriendsArray = currentFriendsArray.filter((word) => word !== friend);
     
     const contactsRef = doc(db, "users", `${userAccount.id}`);
-
     await updateDoc(contactsRef, {
       friendsArray: currentFriendsArray
     });
+
+    //Delete from other user 
+    const friendsContactRef = collection(db, "users");
+    const q = query(friendsContactRef, where("email", "==", friend));
+    const querySnapshot = await getDocs(q);
+
+    let friendID:string = ""
+    let updatedArr:string[] = []
+
+    querySnapshot.forEach(async (doc) => {
+      const friendsArr = (doc.data().friendsArray);
+      friendID = doc.id
+      updatedArr = (friendsArr.filter((word:string) => word !== user?.email));
+      
+    });
+
+    const friendsRef = doc(db, "users", `${friendID}`);
+    await updateDoc(friendsRef, {
+      friendsArray: updatedArr
+    });
+
+
+    
         
   }
 
@@ -84,7 +109,7 @@ export const ContactList = () => {
         return(
           <div key={index} className="contacts-list-flex-row mt-5">
             <div onClick={()=>{handleClick(friend)}} className="friend">
-              <p>{smallText(friend, 23)}</p>
+              <p>{smallText(friend, 22)}</p>
             </div>
             <button onClick={()=>{removeFriend(friend)}} style={{fontSize: "1rem"}} className="dark-btn red-hover ml-5">Remove</button>
           </div>
