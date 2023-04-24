@@ -86,20 +86,26 @@ export const Dashboard = () => {
         
         if (querySnapshot.size === 0){
             alert("User could not be found")
-        }else{
-                
             
-            const userFriendReq = (querySnapshot.docs[0].data().friendRequest);
-            userFriendReq.push({email:user?.email,id:userAccount.id})
-                    
-            const friendRef = doc(db, "users", querySnapshot.docs[0].id);
-                    
-            await updateDoc(friendRef, {
-                friendRequest: userFriendReq
-            });
+        }else{
+            const friendDoc = querySnapshot.docs[0]
+            
+            if (userAccount.friendsArray.includes(friendDoc.data().email)){
+                setFriendName("");
+                alert("User is already friends with you.")
+            }else{
+                const userFriendReq = (friendDoc.data().friendRequest);
+                userFriendReq.push({email:user?.email,id:userAccount.id})
+                        
+                const friendRef = doc(db, "users", friendDoc.id);
+                        
+                await updateDoc(friendRef, {
+                    friendRequest: userFriendReq
+                });
 
-            setFriendName("");
-            alert("Friend request sent.")
+                setFriendName("");
+                alert("Friend request sent.")
+            }
         }
     
     }
