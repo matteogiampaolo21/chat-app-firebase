@@ -1,7 +1,7 @@
 
 import { auth, db } from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {addDoc, query, where, onSnapshot ,collection , DocumentData,updateDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import {addDoc, query, where, onSnapshot ,collection , DocumentData,updateDoc, or, doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 import { Room, User, FriendRequest } from "../assets/utilities";
@@ -107,7 +107,7 @@ export const Dashboard = () => {
     const acceptRequest = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const currentEvent = JSON.parse(e.currentTarget.value)
         
-        const userRef = doc(db, "users", userAccount.id);
+        
         
         // update user that sent friend request
         const otherUserRef = doc(db,"users", currentEvent.id)
@@ -124,28 +124,35 @@ export const Dashboard = () => {
 
 
         
+        const userRef = doc(db, "users", userAccount.id);
 
         const currentFriendArray:string[] = (userAccount.friendsArray);
         let currentRequestArray:FriendRequest[] = (userAccount.friendRequest);
-        
         currentFriendArray.push(currentEvent.email);
         currentRequestArray = currentRequestArray.filter((word) => {word.email !== currentEvent.email});
-        
-
         await updateDoc(userRef, {
           friendsArray: currentFriendArray,
           friendRequest: currentRequestArray
         });
+
+
+
+        const contactsRef = collection(db, "contacts");
+        const contactQ = query(contactsRef, or(
+            where("users", "==", `${user?.email},${currentEvent.email}`),
+            where("users", "==", `${currentEvent.email},${user?.email}`)
+        )
+        );
+        const querySnapshot = await getDocs(contactQ);
+        console.log(querySnapshot.size)
+        if ( querySnapshot.size === 0){
+            await addDoc(collection(db, "contacts"), {
+                users:`${userAccount.email},${otherUserData.email}`
+            });
+        }else{
+            console.log("yo")
+        }
         
-        await addDoc(collection(db, "contacts"), {
-            users:`${userAccount.email},${otherUserData.email}`
-        });
-        // const contactsRef = collection(db, "contacts");
-        // const contactQ = query(contactsRef, or(
-        // where("users", "==", `${user?.email},${friend}`),
-        // where("users", "==", `${friend},${user?.email}`)
-        // )
-        // );
         
     }
     const declineRequest = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
