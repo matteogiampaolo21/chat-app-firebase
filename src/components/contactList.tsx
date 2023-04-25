@@ -109,7 +109,7 @@ export const ContactList = () => {
         return(
           <div key={index} className="contacts-list-flex-row mt-5">
             <div onClick={()=>{handleClick(friend)}} className="friend">
-              <p>{smallText(friend, 22)}</p>
+              <p>{smallText(friend, 26)}</p>
             </div>
             <button onClick={()=>{removeFriend(friend)}} style={{fontSize: "1rem"}} className="dark-btn red-hover ml-5">Remove</button>
           </div>

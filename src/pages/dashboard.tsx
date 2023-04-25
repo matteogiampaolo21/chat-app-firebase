@@ -184,51 +184,53 @@ export const Dashboard = () => {
         <div>
             { user ?
                 <div className="dasboard-grid">
-                    <div className="friend-sidebar">
-                    <div className="dashboard-sidebar diagonal-lines">
-                        <h2>Create room:</h2>
-                        
-                        <input onChange={(e)=>{setName(e.target.value)}} className="dark-input mr-5" type="text" placeholder="Enter name" />
-                        <button onClick={createRoom} type="submit" className="blue-btn">+</button>
-                    </div>
-                    <div className="friend-sidebar-component diagonal-lines">
-                        <h2>Friend Requests :</h2>
-                        {userAccount.friendRequest.length === 0 ?
-                        <div>you have no one.</div> 
-                        :
-                        userAccount.friendRequest.map((person:FriendRequest,index:number)=>{
-                            return(
-                                <div key={index}>
-                                    {person.email}
-                                    <button onClick={(e) => {acceptRequest(e)}} value={JSON.stringify(person)} className="btn green-hover">Y</button>
-                                    <button onClick={(e) => {declineRequest(e)}} value={JSON.stringify(person)} className="btn red-hover">N</button>
-                                </div>
-                            )
-                        })
-                        }    
-                
-                    </div>
+
+                    <div className="widget">
+                        <div className="create-room-widget sub-widget diagonal-lines">
+                            <h2>Create room:</h2>
+                            
+                            <input onChange={(e)=>{setName(e.target.value)}} className="dark-input" type="text" placeholder="Enter name" />
+                            <button onClick={createRoom} type="submit" className="dark-btn">+</button>
+                        </div>
+                        <div className="sub-widget diagonal-lines">
+                            <h2>Friend Requests :</h2>
+                            {userAccount.friendRequest.length === 0 ?
+                            <div>you have no one.</div> 
+                            :
+                            userAccount.friendRequest.map((person:FriendRequest,index:number)=>{
+                                return(
+                                    <div key={index}>
+                                        {person.email}
+                                        <button onClick={(e) => {acceptRequest(e)}} value={JSON.stringify(person)} className="btn green-hover">Y</button>
+                                        <button onClick={(e) => {declineRequest(e)}} value={JSON.stringify(person)} className="btn red-hover">N</button>
+                                    </div>
+                                )
+                            })
+                            }    
+                    
+                        </div>
                     </div>
 
-                    <div className="dasboard">
+
+                    <div className=" widget">
                         {userRooms.map( (doc:Room,index:number) => {
                             return(
-                                <div onClick={() => {navigate(`/dashboard/rooms/${doc.id}`)}} key={index} className="room-container triangle-dots">
-                                    <h2 className="room-title ml-5">{doc.name}</h2>
-                                    <div className="user-list">
-                                        <p className="ml-5">{doc.users.length} users in this room.</p>
-                                        
-                                    </div>
+                                <div onClick={() => {navigate(`/dashboard/rooms/${doc.id}`)}} key={index} className="sub-widget  triangle-dots">
+                                    <h2 className="room-title">{doc.name}</h2>
+                                    <p>{doc.users.length} users in this room.</p>
                                 </div>
                             )
                         })}
                     </div>
 
-                    <div className="friend-sidebar">
-                        <div className="friend-sidebar-component diagonal-lines">
+
+                    <div className="widget">
+                        <div className="friends-widget sub-widget diagonal-lines">
                             <h2>Friends :</h2>
-                            <input onChange={(e)=>{setFriendName(e.target.value)}} value={friendName} className="dark-input mr-5" type="text" placeholder="Add friend" />
-                            <button onClick={handleAddFriend} type="button" className="blue-btn mb-5">+</button>
+                            <div className="add-friends-wdgt">
+                                <input onChange={(e)=>{setFriendName(e.target.value)}} value={friendName} className="dark-input" type="text" placeholder="Add friend" />
+                                <button onClick={handleAddFriend} type="button" className="blue-btn mb-5">+</button>
+                            </div>
                             <ContactList/>
                         </div>
                         
