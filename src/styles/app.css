@@ -8,6 +8,19 @@
     --component-shadow: #202020;
 }
 
+body::-webkit-scrollbar {
+    width: 0.15rem;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: var(--dark-component-bg);
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: var(--light-bg-blue);
+  }
+  
+
 ::placeholder { 
     color: #a0a0a0;
     opacity: 1; 
@@ -127,9 +140,9 @@ body{
 
 /* bg patterns */
 .two-circle-bg{
-    background: radial-gradient(circle at 60% 40%, #2e2e2e 25%, transparent 26%),radial-gradient(circle at 40% 60%, #303030 25%, transparent 26%) !important ;
+    background: radial-gradient(circle at 60% 40%, #2e2e2e 25%, transparent 26%),radial-gradient(circle at 40% 60%, #303030 25%, transparent 26%)  ;
     background-size: 7em 12em !important;
-    background-color: var(--dark-component-bg) !important;
+    background-color: var(--dark-component-bg) ;
     opacity: 1 !important;
 }
 .diagonal-lines{

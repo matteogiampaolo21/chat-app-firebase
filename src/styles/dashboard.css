@@ -3,11 +3,13 @@
   grid-template-columns: 400px 660px 400px;
   column-gap: 30px;
   justify-content: center;
+  padding-top: 100px;
 }
 .widget{
   display: flex;
   flex-direction: column;
   row-gap: 30px;
+  
   
 }
 .sub-widget{
@@ -32,7 +34,7 @@
   width: 43px;
   height: 43px;
 }
-.room-title:hover{
+.room-title{transition: 0.3s;}.room-title:hover{
   color : var(--light-bg-blue);
   cursor: pointer;
 }
@@ -52,4 +54,29 @@
   color:var(--light-bg-blue);
   border: 1px solid var(--light-bg-blue);
   
+}
+
+
+/* //////////////////// Media ////////////////////// */
+@media only screen and (max-width: 1560px) {
+  .dasboard-grid{
+    grid-template-columns: 400px 230px 400px;
+    grid-template-areas: 
+      "main main side"
+      "main main side2"
+      "main main side2";
+    row-gap: 30px;
+  }
+  .left-widget{grid-area: side;}
+  .room-widget{grid-area: main;}
+  .right-widget{grid-area: side2;}
+}
+@media only screen and (max-width: 1130px) {
+  .dasboard-grid{
+    grid-template-columns: 360px 10px 360px;
+    
+  }
+  .left-widget{grid-area: side;}
+  .room-widget{grid-area: main;}
+  .right-widget{grid-area: side2;}
 }

@@ -185,7 +185,7 @@ export const Dashboard = () => {
             { user ?
                 <div className="dasboard-grid">
 
-                    <div className="widget">
+                    <div className="left-widget widget">
                         <div className="create-room-widget sub-widget diagonal-lines">
                             <h2>Create room:</h2>
                             
@@ -212,7 +212,7 @@ export const Dashboard = () => {
                     </div>
 
 
-                    <div className=" widget">
+                    <div className="room-widget widget">
                         {userRooms.map( (doc:Room,index:number) => {
                             return(
                                 <div onClick={() => {navigate(`/dashboard/rooms/${doc.id}`)}} key={index} className="sub-widget  triangle-dots">
@@ -224,7 +224,7 @@ export const Dashboard = () => {
                     </div>
 
 
-                    <div className="widget">
+                    <div className="right-widget widget">
                         <div className="friends-widget sub-widget diagonal-lines">
                             <h2>Friends :</h2>
                             <div className="add-friends-wdgt">
