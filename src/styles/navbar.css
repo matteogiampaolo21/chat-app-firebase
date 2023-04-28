@@ -20,7 +20,7 @@
 
 }
 .hidden{
-  display: hidden;
+  display: none;
 }
 
 .nav-item:last-child {
@@ -39,6 +39,23 @@
   color:#6ca9fe;
   font-size: 1.4rem;
   transition: 0.3s;
+}
+
+.nav-btn{
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 20px;
+  justify-content: center;
+  color: rgb(196, 196, 196);
+  background-color: var(--dark-bg-color);
+  border: solid #838383 1px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.nav-btn:hover{
+  background-color: #171717;
+  border-color: #a7a7a7;
+  color: #c7c7c7;
 }
 
 @media only screen and (max-width: 1010px) {
