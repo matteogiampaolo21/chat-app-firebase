@@ -3,7 +3,7 @@
   grid-template-columns: 400px 660px 400px;
   column-gap: 30px;
   justify-content: center;
-  padding-top: 100px;
+  padding-top: 50px;
 }
 .widget{
   display: flex;
@@ -79,4 +79,41 @@
   .left-widget{grid-area: side;}
   .room-widget{grid-area: main;}
   .right-widget{grid-area: side2;}
+}
+@media only screen and (max-width: 825px) {
+  .friend-requests-widget{
+    display: none;
+  }
+  .right-widget{
+    display: none;
+  }
+  .dasboard-grid{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    margin: 0 auto;
+  }
+  .dark-input{
+    width: 88%;
+  }
+  
+}
+@media only screen and (max-width: 630px) {
+  
+  .dasboard-grid{
+    width: 297px;
+    
+  }
+  .create-room-widget{
+    display: flex;
+    flex-direction: column;
+  }
+  .create-room-widget .dark-btn{
+    margin: 10px 0;
+    width: 100%;
+  }
+  .dark-input{
+    width: 247px;
+  }
+  
 }

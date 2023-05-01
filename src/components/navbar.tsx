@@ -43,7 +43,7 @@ export const Navbar = () => {
   return (
     <div>
     { smallNavbar ?
-      <nav className="navbar">
+      <nav className="navbar diagonal-lines">
         <ul className="navbar-nav">
           <li className="brand" style={{display: "flex"}}><h1>Mercury</h1><button onClick={checkSmallNavbarStyle} className="nav-btn">=</button></li>
           
@@ -55,7 +55,7 @@ export const Navbar = () => {
         </ul>
       </nav>
     :
-    <nav className="navbar">
+    <nav className="navbar diagonal-lines">
       <ul className="navbar-nav">
         <li className="brand"><h1>Mercury</h1></li>
         

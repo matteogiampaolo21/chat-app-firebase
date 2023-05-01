@@ -192,7 +192,7 @@ export const Dashboard = () => {
                             <input onChange={(e)=>{setName(e.target.value)}} className="dark-input" type="text" placeholder="Enter name" />
                             <button onClick={createRoom} type="submit" className="dark-btn">+</button>
                         </div>
-                        <div className="sub-widget diagonal-lines">
+                        <div className="friend-requests-widget sub-widget diagonal-lines">
                             <h2>Friend Requests :</h2>
                             {userAccount.friendRequest.length === 0 ?
                             <div>you have no one.</div> 
