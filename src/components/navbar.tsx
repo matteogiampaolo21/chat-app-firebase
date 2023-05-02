@@ -30,13 +30,17 @@ export const Navbar = () => {
   }
 
   useEffect(() => {
+    
     function handleResize() {
       if (window.innerWidth <= 965){
         setNavbar(true)
+        
       }else{
         setNavbar(false)
+        
       } 
     }
+    handleResize()
     window.addEventListener('resize', handleResize) 
   });
 

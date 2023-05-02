@@ -66,7 +66,7 @@ export const AuthRegister = () => {
             <input className="dark-input" onChange={(event) => {setPassword(event.target.value)}} type="password" placeholder="Password"></input>
             
             <h3 className="m0">Username:</h3>
-            <input className="dark-input" onChange={(event) => {setUsername(event.target.value)}} type="text" placeholder="THIS CANNOT BE CHANGED"></input> 
+            <input className="dark-input" onChange={(event) => {setUsername(event.target.value)}} type="text" placeholder="Username"></input> 
             
             <button className="dark-btn max-width green-hover" onClick={signIn}>Sign Up!</button>
             <button className="dark-btn max-width" onClick={signInWithGoogle}>Sign in with Google</button>

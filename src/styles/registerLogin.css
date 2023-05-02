@@ -12,6 +12,7 @@
     height:2.2rem;
     margin-top:10px;
     margin-bottom: 25px;
+    width: 360px;
 }
 .sign-in .dark-btn{
     height:3.2rem;
@@ -33,6 +34,7 @@
     height:2.2rem;
     margin-top:10px;
     margin-bottom: 25px;
+    width: 360px;
 }
 .log-in .dark-btn{
     height:3.2rem;
@@ -48,3 +50,22 @@
     color: #ffffff;
     
 }
+
+@media only screen and (max-width: 475px) {
+    .sign-in,.log-in{   
+        width: 250px;
+        padding: 20px;
+    }
+    .sign-in .dark-input{
+        width: 240px;
+    }
+    .log-in .dark-input{
+        width: 240px;
+    }
+    .sign-in .dark-input{
+        font-size: 1rem;
+    }
+    .log-in .dark-input{
+        font-size: 1rem;
+    }
+  }

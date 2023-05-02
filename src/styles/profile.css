@@ -1,6 +1,6 @@
 .profile-card{
     background-color: var(--dark-component-bg);
-    width: 30%;
+    width: 700px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
@@ -13,13 +13,23 @@
     display: flex;
     flex-direction: column;
 }
-.username-form {
-    display: flex;
-    flex-direction: row;
+
+.profile-flex-item input{
+    width: 690px;
 }
-.username-form input{
-    height: 51px
+.username-form .dark-btn{
+    margin: 15px 0;
+    height: 44px;
 }
-.username-form button{
-    height: 54px;
-}
+@media only screen and (max-width: 770px) {
+  
+    .profile-card{
+        
+        width: 250px;
+        
+    }
+    .profile-flex-item input{
+        width: 240px;
+    }
+    
+  }

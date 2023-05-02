@@ -57,10 +57,15 @@ body{
 
 
 /* assets */
+.contact-friend{transition: 0.3s;}.contact-friend:hover{
+    color: var(--light-bg-blue);
+    padding-left: 10px;
+}
 .contacts-list-flex-row{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 .btn{
     width: 2rem;

@@ -12,6 +12,7 @@ export const ContactList = () => {
 
   const [user] = useAuthState(auth);
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [friendName, setFriendName] = useState<string>("")
 
   const [userAccount,setUserAccount] = useState<User>({
     id:"",
@@ -102,16 +103,57 @@ export const ContactList = () => {
         
   }
 
+  const handleAddFriend = async () => {
+
+    const usersRef = collection(db, "users");
+    const userQ = query(usersRef, where("email", "==", friendName));
+    const querySnapshot = await getDocs(userQ);
+    // console.log(querySnapshot.docs[0].data());
+    // console.log(querySnapshot)
+
+    
+    if (querySnapshot.size === 0){
+        alert("User could not be found")
+        
+    }else{
+        const friendDoc = querySnapshot.docs[0]
+        
+        if (userAccount.friendsArray.includes(friendDoc.data().email)){
+            setFriendName("");
+            alert("User is already friends with you.")
+        }else{
+            const userFriendReq = (friendDoc.data().friendRequest);
+            userFriendReq.push({email:user?.email,id:userAccount.id})
+                    
+            const friendRef = doc(db, "users", friendDoc.id);
+                    
+            await updateDoc(friendRef, {
+                friendRequest: userFriendReq
+            });
+
+            setFriendName("");
+            alert("Friend request sent.")
+        }
+    }
+
+}
+
   return (
     <div className="contacts-list">
-      
+      <div className="add-friends-wdgt mt-5">
+        <input onChange={(e)=>{setFriendName(e.target.value)}} value={friendName} className="dark-input" type="text" placeholder="Add friend" />
+        <button onClick={handleAddFriend} type="button" className="blue-btn mb-5">+</button>
+      </div>
       {userAccount.friendsArray.map((friend:string,index:number) => {
         return(
-          <div key={index} className="contacts-list-flex-row mt-5">
-            <div onClick={()=>{handleClick(friend)}} className="friend">
-              <p>{smallText(friend, 26)}</p>
+          <div>
+            <div onClick={()=>{handleClick(friend)}} key={index} className="contacts-list-flex-row mt-5">
+              
+              
+              <p className="m0 contact-friend">{smallText(friend, 26)}</p>
+              
+              <button onClick={()=>{removeFriend(friend)}} style={{fontSize: "1rem"}} className="dark-btn red-hover ml-5">Remove</button>
             </div>
-            <button onClick={()=>{removeFriend(friend)}} style={{fontSize: "1rem"}} className="dark-btn red-hover ml-5">Remove</button>
           </div>
         )
       })}

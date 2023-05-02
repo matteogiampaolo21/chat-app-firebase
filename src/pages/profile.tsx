@@ -72,15 +72,15 @@ export const Profile = () => {
             { user ?
                 <div className="profile-card triangle-dots">
                     
-                    <div className="profile-flex-item">
+                    <div className="profile-flex-item username-form">
                         <h1>Change Username:</h1>
-                        <div className="username-form">
-                            <input onChange={(e)=>{setUsername(e.target.value)}} value={newUsername} className="dark-input" type="text" placeholder={userAccount.username} />
-                            <button onClick={handleNameChange} className="ml-5 dark-btn">Change</button>
-                        </div>
+                        
+                        <input onChange={(e)=>{setUsername(e.target.value)}} value={newUsername} className="dark-input" type="text" placeholder={userAccount.username} />
+                        <button onClick={handleNameChange} className=" dark-btn">Change</button>
+                        
                     </div>
                     <div className="profile-flex-item">
-                        <h1>Friends List:</h1>
+                        <h1 className="m0">Friends List:</h1>
                         <div className="">
                             <ContactList/>
                         </div>

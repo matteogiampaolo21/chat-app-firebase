@@ -69,10 +69,12 @@ export const Dashboard = () => {
     
     
     const createRoom = async () => {
+        setName("")
         await addDoc(collection(db, "rooms"), {
             name: roomName,
             users: [user?.email]
         });
+        
     }
 
     const handleAddFriend = async () => {
@@ -189,7 +191,7 @@ export const Dashboard = () => {
                         <div className="create-room-widget sub-widget diagonal-lines">
                             <h2>Create room:</h2>
                             
-                            <input onChange={(e)=>{setName(e.target.value)}} className="dark-input" type="text" placeholder="Enter name" />
+                            <input onChange={(e)=>{setName(e.target.value)}} value={roomName} className="dark-input" type="text" placeholder="Enter name" />
                             <button onClick={createRoom} type="submit" className="dark-btn">+</button>
                         </div>
                         <div className="friend-requests-widget sub-widget diagonal-lines">
@@ -226,11 +228,9 @@ export const Dashboard = () => {
 
                     <div className="right-widget widget">
                         <div className="friends-widget sub-widget diagonal-lines">
-                            <h2>Friends :</h2>
-                            <div className="add-friends-wdgt">
-                                <input onChange={(e)=>{setFriendName(e.target.value)}} value={friendName} className="dark-input" type="text" placeholder="Add friend" />
-                                <button onClick={handleAddFriend} type="button" className="blue-btn mb-5">+</button>
-                            </div>
+                            <h2>Friends:</h2>
+                            
+                            
                             <ContactList/>
                         </div>
                         
