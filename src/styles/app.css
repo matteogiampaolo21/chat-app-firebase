@@ -25,6 +25,10 @@ body::-webkit-scrollbar {
     color: #a0a0a0;
     opacity: 1; 
 }
+
+div{
+    word-wrap: break-word;
+}
 body{
     background-color: var(--dark-bg-color);
     color:var(--dark-font-color);
@@ -68,7 +72,7 @@ body{
     align-items: center;
 }
 .btn{
-    width: 2rem;
+    
     font-size: 0.8rem;
     font-weight: bolder;
     padding: 9px 6px;

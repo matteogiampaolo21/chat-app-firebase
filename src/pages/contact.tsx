@@ -107,17 +107,19 @@ export const Contact = () => {
             </div>
             <div className="message-box triangle-dots">
               <h2>Chat</h2>
-              {contactMessages.map((messages:Message,index:number)=>{
-                return(
-                  <div key={index} className="message">
-                    <p><b>{messages.user}</b> : {messages.message} <span className="time-sent">{`${new Date(messages.createdAt).getHours()}:${new Date(messages.createdAt).getMinutes()}`}</span></p>
-                  </div>
-                )
-              })}
-              <form className="message-form">
-                <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
-                <button onClick={(e) => {handleClick(e)}} className="dark-btn" type="submit">Send</button>
-              </form>
+              <div>
+                {contactMessages.map((messages:Message,index:number)=>{
+                  return(
+                    <div key={index} className="message">
+                      <p><b>{messages.user}</b> : {messages.message} <span className="time-sent">{`${new Date(messages.createdAt).getHours()}:${new Date(messages.createdAt).getMinutes()}`}</span></p>
+                    </div>
+                  )
+                })}
+                <form className="message-form">
+                  <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
+                  <button onClick={(e) => {handleClick(e)}} className="dark-btn" type="submit">Send</button>
+                </form>
+              </div>
             </div>
           </div>
           : <Navigate replace to="/dashboard" /> }

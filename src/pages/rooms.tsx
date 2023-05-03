@@ -137,8 +137,8 @@ export const Rooms = () => {
 
               <div className="sidebar diagonal-lines">
 
-                <h2>{userRoom.name}</h2>
-                <div className="add-user-box">
+                
+                <div className="add-user-box ">
                   <input onChange={(e)=>{setNewUser(e.target.value)}} value={newUser} className="dark-input" placeholder="Add user"></input>
                   <button onClick={handleAddUser} className="dark-btn green-hover">+</button>
                 </div>
@@ -146,7 +146,10 @@ export const Rooms = () => {
                 <h3>User list:</h3>
                 {userRoom.users.map((user:string,index:number)=>{
                   return(
-                      <p key={index}>{user}<button onClick={() => {removeUser(user)}} className="btn ml-5 red-hover">-</button></p>
+                    <div className="user-list-container">
+                      <p key={index}>{user}</p>
+                      <button onClick={() => {removeUser(user)}} className="btn red-hover">Kick</button>
+                    </div>
                   )
                 })}     
                                   
@@ -154,7 +157,8 @@ export const Rooms = () => {
 
 
               <div className="message-box triangle-dots">
-                <h2>Chat</h2>
+                <h2>{userRoom.name}</h2>
+                <div>
                 {roomMessages.map((messages:Message,index:number)=>{
                   return(
                     <div key={index} className="message">
@@ -166,6 +170,7 @@ export const Rooms = () => {
                   <input onChange={(e)=>{setText(e.target.value)}} value={inputText} className="dark-input" type="text" />
                   <button onClick={(e) => {handleClick(e)}} className="dark-btn" type="submit">Send</button>
                 </form>
+                </div>
               </div>
           </div>
           

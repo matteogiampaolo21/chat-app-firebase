@@ -218,7 +218,7 @@ export const Dashboard = () => {
                         {userRooms.map( (doc:Room,index:number) => {
                             return(
                                 <div onClick={() => {navigate(`/dashboard/rooms/${doc.id}`)}} key={index} className="sub-widget  triangle-dots">
-                                    <h2 className="room-title">{doc.name}</h2>
+                                    <h2 className="room-title hyphens">{doc.name}</h2>
                                     <p>{doc.users.length} users in this room.</p>
                                 </div>
                             )
