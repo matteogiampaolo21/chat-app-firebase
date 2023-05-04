@@ -29,6 +29,7 @@ body::-webkit-scrollbar {
 div{
     word-wrap: break-word;
 }
+
 body{
     background-color: var(--dark-bg-color);
     color:var(--dark-font-color);

@@ -32,7 +32,7 @@ export const Navbar = () => {
   useEffect(() => {
     
     function handleResize() {
-      if (window.innerWidth <= 965){
+      if (window.innerWidth <= 1300){
         setNavbar(true)
         
       }else{
@@ -55,6 +55,7 @@ export const Navbar = () => {
           <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/profile">Profile</a></li>
           <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/register">Register</a></li>
           <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/login">Login</a></li>
+          {user ? <li className="nav-item"><p>Hello, <b className="break-word">{user.email}</b> !</p></li> : <li></li>}
           <li className={`nav-item ${cssStyle}`}><button className="dark-btn ml-5 mr-5" onClick={logOut}>Sign Out</button></li>
         </ul>
       </nav>
@@ -67,6 +68,7 @@ export const Navbar = () => {
         <li className="nav-item"><a className="nav-link" href="/profile">Profile</a></li>
         <li className="nav-item"><a className="nav-link" href="/register">Register</a></li>
         <li className="nav-item"><a className="nav-link" href="/login">Login</a></li>
+        {user ? <li className="nav-item mr-5"><p>Hello, <b>{user.email}</b> !</p></li> : <li></li>}
         <li className="nav-item"><button className=" dark-btn ml-5 mr-5" onClick={logOut}>Sign Out</button></li>
       </ul>
     </nav>
