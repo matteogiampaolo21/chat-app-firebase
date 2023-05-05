@@ -62,6 +62,14 @@ body{
 
 
 /* assets */
+.error-text{
+    justify-content: center;
+    display:flex;
+    font-size:1.3rem;
+    margin-top: 10%;
+    text-align: center;
+}
+
 .contact-friend{transition: 0.3s;}.contact-friend:hover{
     color: var(--light-bg-blue);
     padding-left: 10px;

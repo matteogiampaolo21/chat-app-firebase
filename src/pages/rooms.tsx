@@ -98,15 +98,27 @@ export const Rooms = () => {
     }
 
     const handleAddUser = async () => {
-      const currentUserArray:string[] = (userRoom.users); 
-      currentUserArray.push(newUser);
+      const usersRef = collection(db, "users");
+      const userQ = query(usersRef, where("email", "==", newUser));
+      const querySnapshot = await getDocs(userQ);
 
-      const roomRef = doc(db, "rooms", `${roomId}`);
+      if (querySnapshot.size === 0){
+        alert("User could not be found")
+        
+      }else{
+        const currentUserArray:string[] = (userRoom.users); 
+        currentUserArray.push(newUser);
 
-      await updateDoc(roomRef, {
-        users: currentUserArray
-      });
-      setNewUser("");
+        const roomRef = doc(db, "rooms", `${roomId}`);
+
+        await updateDoc(roomRef, {
+          users: currentUserArray
+        });
+        setNewUser("");
+    }
+
+
+      
       
     }
 

@@ -147,10 +147,10 @@ export const ContactList = () => {
       {userAccount.friendsArray.map((friend:string,index:number) => {
         return(
           <div>
-            <div onClick={()=>{handleClick(friend)}} key={index} className="contacts-list-flex-row mt-5">
+            <div key={index} className="contacts-list-flex-row mt-5">
               
               
-              <p className="m0 contact-friend">{smallText(friend, 26)}</p>
+              <p onClick={()=>{handleClick(friend)}} className="m0 contact-friend">{smallText(friend, 26)}</p>
               
               <button onClick={()=>{removeFriend(friend)}} style={{fontSize: "1rem"}} className="dark-btn red-hover ml-5">Remove</button>
             </div>

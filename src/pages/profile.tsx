@@ -81,15 +81,14 @@ export const Profile = () => {
                     </div>
                     <div className="profile-flex-item">
                         <h1 className="m0">Friends List:</h1>
-                        <div className="">
+                        <div>
                             <ContactList/>
                         </div>
                     </div>
                     
                 </div>
             :
-            <div>
-            </div>
+                <div className="error-text">Please login or register to access your profile.</div>
             }
         </div>
         }

@@ -167,9 +167,12 @@ export const Dashboard = () => {
         const currentEvent = JSON.parse(e.currentTarget.value)
         const userRef = doc(db, "users", userAccount.id);
 
-        let currentRequestArray:FriendRequest[] = (userAccount.friendRequest);
+        let currentRequestArray:string[] = [];
+        (userAccount.friendRequest).map((person:{email:string,id:string}) => {
+            currentRequestArray.push(person.email);
+        })
             
-        currentRequestArray = currentRequestArray.filter((word) => {word.email !== currentEvent.email});
+        currentRequestArray = currentRequestArray.filter((word) => {word !== currentEvent.email});
 
         await updateDoc(userRef, {
           friendRequest: currentRequestArray
@@ -238,8 +241,7 @@ export const Dashboard = () => {
                     
                 </div>
             :
-                <div>
-                </div>
+                <div className="error-text">Please login or register to access the dashboard.</div>
             }
         </div>
         }
