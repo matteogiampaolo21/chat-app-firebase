@@ -77,40 +77,7 @@ export const Dashboard = () => {
         
     }
 
-    const handleAddFriend = async () => {
-
-        const usersRef = collection(db, "users");
-        const userQ = query(usersRef, where("email", "==", friendName));
-        const querySnapshot = await getDocs(userQ);
-        // console.log(querySnapshot.docs[0].data());
-        // console.log(querySnapshot)
-
-        
-        if (querySnapshot.size === 0){
-            alert("User could not be found")
-            
-        }else{
-            const friendDoc = querySnapshot.docs[0]
-            
-            if (userAccount.friendsArray.includes(friendDoc.data().email)){
-                setFriendName("");
-                alert("User is already friends with you.")
-            }else{
-                const userFriendReq = (friendDoc.data().friendRequest);
-                userFriendReq.push({email:user?.email,id:userAccount.id})
-                        
-                const friendRef = doc(db, "users", friendDoc.id);
-                        
-                await updateDoc(friendRef, {
-                    friendRequest: userFriendReq
-                });
-
-                setFriendName("");
-                alert("Friend request sent.")
-            }
-        }
     
-    }
 
     const acceptRequest = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const currentEvent = JSON.parse(e.currentTarget.value)
@@ -137,7 +104,7 @@ export const Dashboard = () => {
         const currentFriendArray:string[] = (userAccount.friendsArray);
         let currentRequestArray:FriendRequest[] = (userAccount.friendRequest);
         currentFriendArray.push(currentEvent.email);
-        currentRequestArray = currentRequestArray.filter((word) => {word.email !== currentEvent.email});
+        currentRequestArray = currentRequestArray.filter(user => user.email !== currentEvent.email);
         await updateDoc(userRef, {
           friendsArray: currentFriendArray,
           friendRequest: currentRequestArray
@@ -164,19 +131,18 @@ export const Dashboard = () => {
         
     }
     const declineRequest = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        
         const currentEvent = JSON.parse(e.currentTarget.value)
         const userRef = doc(db, "users", userAccount.id);
 
-        let currentRequestArray:string[] = [];
-        (userAccount.friendRequest).map((person:{email:string,id:string}) => {
-            currentRequestArray.push(person.email);
-        })
-            
-        currentRequestArray = currentRequestArray.filter((word) => {word !== currentEvent.email});
+        let currentRequestArray:{email:string,id:string}[] = [];
+        
+        currentRequestArray = userAccount.friendRequest.filter(user => user.email !== currentEvent.email);
 
         await updateDoc(userRef, {
           friendRequest: currentRequestArray
         });
+        
         
     }
 

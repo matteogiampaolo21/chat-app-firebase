@@ -103,7 +103,8 @@ export const ContactList = () => {
         
   }
 
-  const handleAddFriend = async () => {
+  const handleAddFriend = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    
 
     const usersRef = collection(db, "users");
     const userQ = query(usersRef, where("email", "==", friendName));
@@ -117,10 +118,15 @@ export const ContactList = () => {
         
     }else{
         const friendDoc = querySnapshot.docs[0]
-        
-        if (userAccount.friendsArray.includes(friendDoc.data().email)){
+        console.log(friendDoc.data().friendRequest)
+        if (friendDoc.data().friendRequest.some((x:{email:string,id:string}) => x.email === friendName)){
+          setFriendName("");
+          alert("Already sent friend request to this person.")
+          e.currentTarget.disabled = false;
+        }else if (userAccount.friendsArray.includes(friendDoc.data().email)){
             setFriendName("");
             alert("User is already friends with you.")
+            e.currentTarget.disabled = false;
         }else{
             const userFriendReq = (friendDoc.data().friendRequest);
             userFriendReq.push({email:user?.email,id:userAccount.id})
@@ -133,8 +139,10 @@ export const ContactList = () => {
 
             setFriendName("");
             alert("Friend request sent.")
+            
         }
     }
+    
 
 }
 
@@ -142,7 +150,7 @@ export const ContactList = () => {
     <div className="contacts-list">
       <div className="add-friends-wdgt mt-5">
         <input onChange={(e)=>{setFriendName(e.target.value)}} value={friendName} className="dark-input" type="text" placeholder="Add friend" />
-        <button onClick={handleAddFriend} type="button" className="blue-btn mb-5">+</button>
+        <button onClick={(e) => {handleAddFriend(e)}} type="button" className="blue-btn mb-5">+</button>
       </div>
       {userAccount.friendsArray.map((friend:string,index:number) => {
         return(
