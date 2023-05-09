@@ -118,8 +118,9 @@ export const ContactList = () => {
         
     }else{
         const friendDoc = querySnapshot.docs[0]
-        console.log(friendDoc.data().friendRequest)
-        if (friendDoc.data().friendRequest.some((x:{email:string,id:string}) => x.email === friendName)){
+        
+        
+        if (friendDoc.data().friendRequest.some((x:{email:string,id:string}) => x.email === userAccount.email)){
           setFriendName("");
           alert("Already sent friend request to this person.")
           e.currentTarget.disabled = false;

@@ -177,4 +177,12 @@ body{
 .time-sent{
     font-size: 0.8rem;
     opacity: 0.3;
+    transition: 0.3s;
+}
+.time-sent:hover{
+    color: white;
+    text-decoration: underline;
+    opacity: 0.5;
+    
+    cursor:default;
 }

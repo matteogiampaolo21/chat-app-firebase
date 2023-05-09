@@ -136,7 +136,9 @@ export const Rooms = () => {
       });
     }
 
-    
+    const changeTimeSetting = (timeDate: string) => {
+      alert(`Message was sent: ${timeDate}`)
+    }
 
     return (
       <div>
@@ -173,8 +175,8 @@ export const Rooms = () => {
                 <div>
                 {roomMessages.map((messages:Message,index:number)=>{
                   return(
-                    <div key={index} className="message">
-                      <p><b>{messages.user}</b> : {messages.message} <span className="time-sent">{`${new Date(messages.createdAt).getHours()}:${new Date(messages.createdAt).getMinutes()}`}</span></p>
+                    <div key={index}  className="message">
+                      <p><b>{messages.user}</b> : {messages.message} <span onClick={() => {changeTimeSetting(messages.createdAt)}} className="time-sent" >{`${new Date(messages.createdAt).getHours()}:${new Date(messages.createdAt).getMinutes()}`}</span></p>
                     </div>
                   )
                 })}
