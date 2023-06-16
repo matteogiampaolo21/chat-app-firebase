@@ -16,7 +16,7 @@ export const Dashboard = () => {
     const [isLoading, setLoading] = useState<boolean>(true);
 
     const [userRooms,setRooms] = useState<DocumentData>([]);
-    const [friendName, setFriendName] = useState<string>("")
+    //const [friendName, setFriendName] = useState<string>("")
 
     const [userAccount,setUserAccount] = useState<User>({
         id:"",
@@ -70,11 +70,14 @@ export const Dashboard = () => {
     
     const createRoom = async () => {
         setName("")
-        await addDoc(collection(db, "rooms"), {
-            name: roomName,
-            users: [user?.email]
-        });
-        
+        if (roomName.length == 0){
+            alert("Room must have a name.")
+        }else{
+            await addDoc(collection(db, "rooms"), {
+                name: roomName,
+                users: [user?.email]
+            });
+        }
     }
 
     
@@ -160,7 +163,7 @@ export const Dashboard = () => {
                         <div className="create-room-widget sub-widget diagonal-lines">
                             <h2>Create room:</h2>
                             
-                            <input onChange={(e)=>{setName(e.target.value)}} value={roomName} className="dark-input" type="text" placeholder="Enter name" />
+                            <input onChange={(e)=>{setName(e.target.value)}} value={roomName} className="dark-input" type="text" placeholder="Enter name" required />
                             <button onClick={createRoom} type="submit" className="dark-btn">+</button>
                         </div>
                         <div className="friend-requests-widget sub-widget diagonal-lines">
