@@ -9,7 +9,7 @@
 }
 
 body::-webkit-scrollbar {
-    width: 0.15rem;
+    width: 0.25rem;
   }
   
   body::-webkit-scrollbar-track {
@@ -17,7 +17,7 @@ body::-webkit-scrollbar {
   }
   
   body::-webkit-scrollbar-thumb {
-    background: var(--light-bg-blue);
+    background: #101010;
   }
   
 
@@ -185,4 +185,26 @@ body{
     opacity: 0.5;
     
     cursor:default;
+}
+
+.loader {
+  border: 16px solid var(--dark-component-bg);
+  border-radius: 50%;
+  border-top: 16px solid var(--light-bg-blue);
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin:30vh auto;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

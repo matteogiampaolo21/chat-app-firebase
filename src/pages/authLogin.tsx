@@ -16,6 +16,7 @@ export const AuthLogin = () => {
             navigate("/dashboard")
         } catch(err){
             console.error(err)
+            alert("Wrong email or password, please check again.")
         }
     }
 

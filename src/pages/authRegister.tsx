@@ -60,13 +60,13 @@ export const AuthRegister = () => {
             <h1 style={{textAlign:"center"}}>Register</h1>
 
             <h3 className="m0">Email:</h3>
-            <input className="dark-input" onChange={(event) => {setEmail(event.target.value)}} placeholder="Email"></input>
+            <input required className="dark-input" onChange={(event) => {setEmail(event.target.value)}} placeholder="Email"></input>
             
             <h3 className="m0">Password:</h3>
-            <input className="dark-input" onChange={(event) => {setPassword(event.target.value)}} type="password" placeholder="Password"></input>
+            <input  required className="dark-input" onChange={(event) => {setPassword(event.target.value)}} type="password" placeholder="Password"></input>
             
             <h3 className="m0">Username:</h3>
-            <input className="dark-input" onChange={(event) => {setUsername(event.target.value)}} type="text" placeholder="Username"></input> 
+            <input  required className="dark-input" onChange={(event) => {setUsername(event.target.value)}} type="text" placeholder="Username"></input> 
             
             <button className="dark-btn max-width green-hover" onClick={signIn}>Sign Up!</button>
             <button className="dark-btn max-width" onClick={signInWithGoogle}>Sign in with Google</button>

@@ -152,10 +152,6 @@ export const Dashboard = () => {
 
     return (
         <div>
-        {isLoading ?
-        <div></div>
-        :
-        <div>
             { user ?
                 <div className="dasboard-grid">
 
@@ -210,11 +206,33 @@ export const Dashboard = () => {
                     
                 </div>
             :
-                <div className="error-text">Please login or register to access the dashboard.</div>
+                <LoadingPage/>
             }
-        </div>
-        }
         </div>
     )
 
+}
+
+
+const LoadingPage = () =>{
+    const [isError, setError] = useState<boolean>(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setError(true)
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <div>
+           {isError ? 
+                <div className="error-text">Please login or register to access the dashboard.</div>
+           : 
+                <div className="loader">
+
+                </div>
+           } 
+        </div>
+    )
 }
