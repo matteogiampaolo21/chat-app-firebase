@@ -26,3 +26,4 @@ src/config
 
 # Local Netlify folder
 .netlify
+firebase.ts
