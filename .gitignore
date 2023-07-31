@@ -11,10 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+src/config
 
 # Editor directories and files
 .vscode/*
-/config
 !.vscode/extensions.json
 .idea
 .DS_Store
