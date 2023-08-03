@@ -15,16 +15,16 @@ Users cannot view the dashboard or profile page without being logged in. In addi
 
 
 &nbsp;
-![Latest News Page](images/dashboard.png )
+![Dashboard Page](images/dashboard.png )
 
 &nbsp;
-![Breaking News Page](images/profile.png )
+![Profile Page](images/profile.png )
 
 &nbsp;
-![Country Form Page](images/room.png )
+![Room Page](images/room.png )
 
 &nbsp;
-![Country Form Page](images/register.png )
+![Register Page](images/register.png )
 
 ### Resources used:
 * Firebase
