@@ -51,12 +51,12 @@ export const Navbar = () => {
         <ul className="navbar-nav">
           <li className="brand" style={{display: "flex"}}><h1>Mercury</h1><button onClick={checkSmallNavbarStyle} className="nav-btn">=</button></li>
           
-          <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/dashboard">Dashboard</a></li>
-          <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/profile">Profile</a></li>
+          {user ? <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/dashboard">Dashboard</a></li> : <li className="hidden"></li>}
+          {user ? <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/profile">Profile</a></li> : <li className="hidden"></li>}
           <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/register">Register</a></li>
           <li className={`nav-item ${cssStyle}`}><a className="nav-link" href="/login">Login</a></li>
-          {user ? <li className="nav-item"><p>Hello, <b className="break-word">{user.email}</b> !</p></li> : <li className="nav-item"></li>}
-          {user ? <li className={`nav-item ${cssStyle}`}><button className="dark-btn ml-5 mr-5" onClick={logOut}>Sign Out</button></li> : <li className="nav-item"></li> }
+          {user ? <li className="nav-item"><p>Hello, <b className="break-word">{user.email}</b> !</p></li> : <li className="hidden"></li>}
+          {user ? <li className={`nav-item ${cssStyle}`}><button className="dark-btn ml-5 mr-5" onClick={logOut}>Sign Out</button></li> : <li className="hidden"></li> }
         </ul>
       </nav>
     :
@@ -64,8 +64,8 @@ export const Navbar = () => {
       <ul className="navbar-nav">
         <li className="brand"><h1>Mercury</h1></li>
         
-        <li className="nav-item"><a className="nav-link" href="/dashboard">Dashboard</a></li>
-        <li className="nav-item"><a className="nav-link" href="/profile">Profile</a></li>
+        {user ? <li className="nav-item"><a className="nav-link" href="/dashboard">Dashboard</a></li> : <li className="nav-item"></li>}
+        {user ? <li className="nav-item"><a className="nav-link" href="/profile">Profile</a></li> : <li className="nav-item"></li>}
         <li className="nav-item"><a className="nav-link" href="/register">Register</a></li>
         <li className="nav-item"><a className="nav-link" href="/login">Login</a></li>
         {user ? <li className="nav-item mr-5"><p>Hello, <b>{user.email}</b> !</p></li> : <li className="nav-item"></li>}

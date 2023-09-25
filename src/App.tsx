@@ -2,6 +2,7 @@
 import './styles/app.css'
 import { useAuthState} from "react-firebase-hooks/auth"
 import { Navbar } from "./components/navbar"
+import { Home } from './pages/home'
 import { AuthLogin } from './pages/authLogin'
 import { AuthRegister } from './pages/authRegister'
 import { Dashboard } from './pages/dashboard'
@@ -19,7 +20,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-      <Route path='/' element={<Dashboard />}/>
+        <Route path='/' element={<Home />}/>
         <Route path='/register' element={<AuthRegister/>}/>
         <Route path='/login' element={<AuthLogin/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>

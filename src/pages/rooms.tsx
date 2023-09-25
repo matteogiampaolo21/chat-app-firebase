@@ -149,7 +149,7 @@ export const Rooms = () => {
             <div className="single-room-grid">
 
 
-              <div className="sidebar diagonal-lines">
+              <div className="sidebar pb-5">
 
                 
                 <div className="add-user-box ">
@@ -158,11 +158,11 @@ export const Rooms = () => {
                 </div>
 
                 <h3>User list:</h3>
-                {userRoom.users.map((user:string,index:number)=>{
+                {userRoom.users.map((roomUser:string,index:number)=>{
                   return(
                     <div className="user-list-container">
-                      <p key={index}>{user}</p>
-                      <button onClick={() => {removeUser(user)}} className="btn red-hover">Kick</button>
+                      <p key={index}>{roomUser}</p>
+                      {roomUser === user.email ? <></> : <button onClick={() => {removeUser(roomUser)}} className="btn red-hover m0">Kick</button>}
                     </div>
                   )
                 })}     
@@ -172,7 +172,7 @@ export const Rooms = () => {
 
               <div className="message-box triangle-dots">
                 <h2>{userRoom.name}</h2>
-                <div>
+                <div >
                 {roomMessages.map((messages:Message,index:number)=>{
                   return(
                     <div key={index}  className="message">

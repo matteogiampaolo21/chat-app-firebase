@@ -41,6 +41,9 @@ body{
 }
 
 /* quick css */
+.pb-5{
+    padding-bottom: 15px;
+}
 .ml-5{
     margin-left: 15px; 
 }
