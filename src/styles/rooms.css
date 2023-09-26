@@ -12,6 +12,7 @@
     box-shadow: 2px 4px 15px var(--component-shadow);
     padding-left: 20px;
     padding-right: 20px;
+    height: max-content;
   }
   .message-box{
     display: flex;

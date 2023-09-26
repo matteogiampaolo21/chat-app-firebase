@@ -162,7 +162,7 @@ export const Rooms = () => {
                   return(
                     <div className="user-list-container">
                       <p key={index}>{roomUser}</p>
-                      {roomUser === user.email ? <></> : <button onClick={() => {removeUser(roomUser)}} className="btn red-hover m0">Kick</button>}
+                      <button onClick={() => {removeUser(roomUser)}} className="btn red-hover m0">{roomUser === user.email? "Leave" : "Kick"}</button>
                     </div>
                   )
                 })}     
